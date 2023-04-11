@@ -1,0 +1,37 @@
+.App {
+    text-align: left;
+  }
+.main{
+    background-color: #282c34;
+    min-height: 100vh;
+    width: 140vh;
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+} 
+
+.input_field{
+    border-radius: 20px;
+    box-shadow: 2px gray;
+}
+.muted_text{
+    color: white;
+}
+
+.forget_pass{
+    font-size:12px; 
+    text-align: right;
+    margin-right: 1vw;
+}
+
+.login_btn{
+    border-radius: 20px;
+    background-color: rgb(116, 172, 31);
+    width: 70vw;
+}
+
+
