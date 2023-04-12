@@ -5,35 +5,44 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { login } from '../../actions/UserAction';
+import { login, clearErrors } from '../../actions/UserAction';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router';
+import crmLogo from '../../assets/img/icon-128.png';
 
 const Loginpage = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const Navigate = useNavigate();
+  const { error, isAuthenticated } = useSelector((state) => state.user);
+  console.log(isAuthenticated);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const redirect = location.search ? location.search.split('=')[1] : '/home';
 
-  useEffect(
-    () => {
-      // if (error) {
-      //   alert.error(error);
-      //   dispatch(clearErrors());
-      // }
-      // if (isAuthenticated) {
-      //   Navigate(redirect);
-      // }
-    },
-    [
-      // dispatch, alert, error, isAuthenticated, Navigate, redirect
-    ]
-  );
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    if (isAuthenticated) {
+      Navigate(redirect);
+    }
+  }, [dispatch, error, isAuthenticated, Navigate, redirect]);
 
   const loginSubmit = (e) => {
     e.preventDefault();
+    console.log('logged');
     dispatch(login(loginEmail, loginPassword));
   };
 
   return (
     <Container className={classes.App}>
-      <Row></Row>
+      <Row>
+        <Col className={classes.imgbox}>
+          <img className={classes.crm_logo} src={crmLogo} alt="logo" />
+        </Col>
+      </Row>
       <Row className={classes.main}>
         <Form onSubmit={loginSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

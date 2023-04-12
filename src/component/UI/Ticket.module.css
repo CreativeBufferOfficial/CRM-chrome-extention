@@ -1,0 +1,18 @@
+.ticket_Card{
+height:25vh;
+}
+.ticket_Body{
+    color:black;
+    font-size: 15px;
+    
+}
+
+.ticket_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.ticket_dropdown{
+width: 30vw;
+}

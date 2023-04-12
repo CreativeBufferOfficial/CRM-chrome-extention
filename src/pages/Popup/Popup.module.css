@@ -21,7 +21,7 @@
   }
 }
 
-.App-header {
+.Appheader {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
   color: white;
 }
 
-.App-link {
+.Applink {
   color: #61dafb;
 }
 

@@ -1,16 +1,23 @@
 import React from 'react';
-import './Newtab.css';
+import classes from './Newtab.module.css';
 import './Newtab.scss';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../Login/Loginpage';
 import Home from '../Home/Homepage';
+import Dashboard from '../Dashboard/Dashboard';
 
 const Newtab = () => {
   return (
-    <div className="App">
+    <div className={classes.App}>
+      {/* <ul>
+        <li>login</li>
+        <li>Home</li>
+      </ul> */}
+
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
