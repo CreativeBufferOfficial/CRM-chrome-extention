@@ -1,18 +1,36 @@
-.ticket_Card{
-height:25vh;
+.ticket_Card {
+  height: auto;
+  border-left-color: 10px #83c944;
 }
-.ticket_Body{
-    color:black;
-    font-size: 15px;
-    
+.ticket_Body {
+  color: black;
+  font-size: 15px;
+  line-height: 15px;
 }
 
-.ticket_row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.ticket_row,
+.ticket_item,
+.profile_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-.ticket_dropdown{
+.profile_row div:nth-child(2) {
+  margin-right: 18px;
+}
+.ticket_item > img {
+  margin-top: -15px;
+  margin-right: 5px;
+}
+.commentIcon {
+  margin-right: 6px;
+}
+.ticket_status {
+  margin-top: 5px;
+  width: 73vw;
+}
+
+/* .ticket_dropdown{
 width: 30vw;
-}
+} */

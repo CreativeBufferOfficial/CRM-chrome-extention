@@ -1,0 +1,66 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 0px 30px 30px 30px;
+}
+.form_group {
+  position: relative;
+}
+/* .user_icon,
+.view_icon {
+  position: absolute;
+} */
+.user_icon > img {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 38px;
+}
+/* TODO:  fix position later */
+.view {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: -26px;
+}
+.close {
+  position: absolute;
+  margin-left: 250px;
+  margin-top: -30px;
+}
+.input_field {
+  border-radius: 20px;
+  box-shadow: 2px gray;
+  margin-top: 20px;
+  width: 80vw;
+  padding: 10px 10px 10px 50px;
+}
+.input_field::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(160, 160, 160);
+  opacity: 1; /* Firefox */
+}
+.muted_text {
+  color: white;
+}
+
+.forget_pass {
+  font-size: 12px;
+  margin-left: 50vw;
+  color: black;
+  color: rgb(105, 104, 104);
+}
+
+.login_btn {
+  border-radius: 20px;
+  border-color: #83c944;
+  background-color: #83c944;
+  width: 80vw;
+  margin-top: 10px;
+}
+.login_btn:hover {
+  background-color: #83c944;
+  border-color: #83c944;
+}

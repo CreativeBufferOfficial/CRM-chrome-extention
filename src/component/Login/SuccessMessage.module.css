@@ -1,0 +1,24 @@
+.success {
+  margin: 20px 0px;
+  border-color: white;
+}
+
+.success_icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.success_message {
+  text-align: center;
+}
+.success_message p {
+  color: rgb(129, 125, 125);
+  font-weight: 500;
+}
+
+.message {
+  margin-top: 10px;
+  font-weight: 600;
+}

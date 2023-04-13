@@ -9,46 +9,46 @@ import classes from './UserData.module.css';
 
 const UserData = () => {
   return (
-    <div>
-      <Container fluid className="mt-5">
-        <Row sm={12}>
-          <Tab.Container id="left-tabs-example" defaultActiveKey="third">
-            <Row>
-              <Col>
-                <Nav variant="pills">
-                  <Nav.Item>
-                    <Nav.Link eventKey="third" className={classes.tab_text}>
-                      To Do (5)
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Col>
-              <Col>
-                <Nav variant="pills">
-                  <Nav.Item>
-                    <Nav.Link eventKey="forth" className={classes.tab_text}>
-                      In Progress (3)
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={12}>
-                <Tab.Content>
-                  <Tab.Pane eventKey="third">
-                    <Ticket />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="forth">
-                    <Ticket />
-                  </Tab.Pane>
-                </Tab.Content>
-              </Col>
-            </Row>
-          </Tab.Container>
+    <Container fluid className={classes.tab}>
+      <Tab.Container id="left-tabs-example" defaultActiveKey="third">
+        <Row>
+          <Col>
+            <Nav variant="pills">
+              <Nav.Item>
+                <Nav.Link eventKey="third" className={classes.tab_text}>
+                  To Do (5)
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col>
+            <Nav variant="pills">
+              <Nav.Item>
+                <Nav.Link eventKey="forth" className={classes.tab_text}>
+                  In Progress (3)
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
         </Row>
-      </Container>
-    </div>
+        <Row className={classes.ticket_bg}>
+          <Col sm={12}>
+            <Tab.Content>
+              <Tab.Pane eventKey="third">
+                <Ticket />
+                <Ticket />
+                <Ticket />
+              </Tab.Pane>
+              <Tab.Pane eventKey="forth">
+                <Ticket />
+                <Ticket />
+                <Ticket />
+              </Tab.Pane>
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
+    </Container>
   );
 };
 

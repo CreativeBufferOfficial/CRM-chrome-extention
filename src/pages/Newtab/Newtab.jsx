@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Newtab.module.css';
-import './Newtab.scss';
+// import './Newtab.scss';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../Login/Loginpage';
 import Home from '../Home/Homepage';
