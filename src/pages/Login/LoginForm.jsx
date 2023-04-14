@@ -8,19 +8,28 @@ import passwordIcon from '../../assets/login/password.png';
 import viewIcon from '../../assets/login/view.png';
 import closeEye from '../../assets/login/close-eye.png';
 import classes from './LoginForm.module.css';
+import Card from 'react-bootstrap/Card';
 
 const LoginForm = ({ isAuthenticated, error }) => {
   const dispatch = useDispatch();
-  console.log(isAuthenticated);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [eye, seteye] = useState(true);
   const [type, settype] = useState(false);
-
+  const [failMessage, setFailMessage] = useState(false);
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
+    }
+    if (isAuthenticated === false) {
+      setFailMessage(true);
+      // const time = setTimeout(() => {
+      // }, 850);
+
+      // return () => {
+      //   clearInterval(time);
+      // };
     }
   }, [dispatch, error, isAuthenticated]);
 
@@ -80,6 +89,16 @@ const LoginForm = ({ isAuthenticated, error }) => {
         <Form.Label className={classes.forget_pass}>
           Forget Password ?
         </Form.Label>
+        {failMessage ? (
+          <Card>
+            <Card.Body className={classes.fail_message}>
+              *Login failed - The Email and password entered is incorrect.
+              Please try again.
+            </Card.Body>
+          </Card>
+        ) : (
+          ''
+        )}
       </Form.Group>
       <Button className={classes.login_btn} type="submit">
         Login

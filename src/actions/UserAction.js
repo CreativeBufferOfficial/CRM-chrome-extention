@@ -28,10 +28,9 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-    console.log(data);
     dispatch({ type: LOGIN_SUCCESS, payload: data.data });
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOGIN_FAIL, payload: error });
   }
 };
 
@@ -50,10 +49,12 @@ export const loadUser = () => async (dispatch) => {
 //Logout User
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`/api/v1/logout`);
+    // const config = { headers: { 'Content-Type': 'application/json' } };
+    console.log('logout hitting');
+    await axios.post(`https://crm.creativebuffer.com/api/logout`);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
-    dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOGOUT_FAIL, payload: error });
   }
 };
 

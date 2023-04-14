@@ -52,6 +52,20 @@
   color: black;
   color: rgb(105, 104, 104);
 }
+.fail_message {
+  font-size: 12px;
+  color: #d83742;
+  background-color: #ffdcdc;
+  border: 1px solid #ffa9a9;
+  padding: 8px;
+}
+
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
 
 .login_btn {
   border-radius: 20px;

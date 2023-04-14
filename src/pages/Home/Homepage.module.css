@@ -2,14 +2,19 @@
   background-image: url('../../assets//task_list/task_list_bg.png');
   /* background-color: #282c34; */
   background-repeat: repeat-y;
-  height: 200vh;
-  width: 50vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.main > div {
+  margin-top: 20px;
+}
+.home_logo {
+  margin-right: 50px;
 }
 .tab_text {
   font-size: 12px;

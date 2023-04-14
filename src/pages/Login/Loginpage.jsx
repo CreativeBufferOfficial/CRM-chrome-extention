@@ -9,7 +9,15 @@ import LoginSuccess from '../../component/Login/SuccessMessage';
 import { useSelector } from 'react-redux';
 
 const Loginpage = () => {
-  const { error, isAuthenticated } = useSelector((state) => state.user);
+  const { error, isAuthenticated, user } = useSelector((state) => state.user);
+
+  // console.log(user.access_token);
+  // console.log(user.access_token);
+  // const token = user.access_token;
+  // console.log(token);
+
+  // localStorage.setItem('token', user.access_token);
+
   return (
     <Container fluid className={classes.App}>
       <Row>

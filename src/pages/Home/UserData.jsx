@@ -38,8 +38,12 @@ const UserData = () => {
                 <Ticket />
                 <Ticket />
                 <Ticket />
+                <Ticket />
+                <Ticket />
               </Tab.Pane>
               <Tab.Pane eventKey="forth">
+                <Ticket />
+                <Ticket />
                 <Ticket />
                 <Ticket />
                 <Ticket />

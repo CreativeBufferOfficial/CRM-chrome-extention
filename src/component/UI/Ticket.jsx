@@ -1,7 +1,5 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import classes from './Ticket.module.css';
 import ticketIcon from '../../assets/task_list/ticket_icon.png';
 import highArrowIcon from '../../assets/task_list/high_arrow.png';
