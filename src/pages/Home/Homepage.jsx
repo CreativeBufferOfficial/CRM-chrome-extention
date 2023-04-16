@@ -11,8 +11,13 @@ import { logout, clearErrors } from '../../actions/UserAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Homepage = () => {
-  const { error } = useSelector((state) => state.user);
+  const { error, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  console.log(`user ${JSON.stringify(user.access_token)}`);
+
+  const token = user.access_token;
+  console.log(token);
 
   useEffect(() => {
     if (error) {

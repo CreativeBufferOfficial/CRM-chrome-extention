@@ -72,6 +72,8 @@
   border-color: #83c944;
   background-color: #83c944;
   width: 80vw;
+  /* color: white; */
+  box-shadow: none;
   margin-top: 10px;
 }
 .login_btn:hover {
