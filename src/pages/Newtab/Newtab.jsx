@@ -5,8 +5,11 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../Login/Loginpage';
 import Home from '../Home/Homepage';
 import Dashboard from '../Dashboard/Dashboard';
+// import { useSelector } from 'react-redux';
 
 const Newtab = () => {
+  // const {isAuthenticated} = useSelector(state=>state.user)
+
   return (
     <div className={classes.App}>
       {/* <ul>

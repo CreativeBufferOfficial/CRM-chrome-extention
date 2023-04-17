@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Login.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,16 +7,20 @@ import Col from 'react-bootstrap/Col';
 import LoginForm from './LoginForm';
 import LoginSuccess from '../../component/Login/SuccessMessage';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Loginpage = () => {
-  const { error, isAuthenticated, user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { error, isAuthenticated } = useSelector((state) => state.user);
 
-  // console.log(user.access_token);
-  // console.log(user.access_token);
-  // const token = user.access_token;
-  // console.log(token);
+  const isloggedIn = localStorage.getItem('isAuthenticated');
 
-  // localStorage.setItem('token', user.access_token);
+  useEffect(() => {
+    if (isloggedIn === 'true') {
+      console.log('Inside isloggedIn');
+      navigate('/home');
+    }
+  }, [navigate, isloggedIn]);
 
   return (
     <Container fluid className={classes.App}>

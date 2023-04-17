@@ -2,9 +2,12 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS,
-  LOAD_USER_FAIL,
+  LOAD_USER_REQUEST_TODO,
+  LOAD_USER_SUCCESS_TODO,
+  LOAD_USER_FAIL_TODO,
+  LOAD_USER_REQUEST_PROCESS,
+  LOAD_USER_SUCCESS_PROCESS,
+  LOAD_USER_FAIL_PROCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   UPDATE_PROFILE_REQUEST,
@@ -21,13 +24,11 @@ import {
 export const userReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
-    case LOAD_USER_REQUEST:
       return {
         loading: true,
         // isAuthenticated: false,
       };
     case LOGIN_SUCCESS:
-    case LOAD_USER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -49,15 +50,6 @@ export const userReducer = (state = { user: {} }, action) => {
         user: null,
         error: action.payload,
       };
-
-    case LOAD_USER_FAIL:
-      return {
-        loading: false,
-        isAuthenticated: false,
-        user: null,
-        error: action.payload,
-      };
-
     case LOGOUT_FAIL:
       return {
         ...state,
@@ -65,6 +57,41 @@ export const userReducer = (state = { user: {} }, action) => {
         error: action.payload,
       };
 
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const userTicketReducer = (state = { userTicket: {} }, action) => {
+  switch (action.type) {
+    case LOAD_USER_REQUEST_TODO:
+    case LOAD_USER_REQUEST_PROCESS:
+      return {
+        loading: true,
+        // isAuthenticated: false,
+      };
+    case LOAD_USER_SUCCESS_TODO:
+    case LOAD_USER_SUCCESS_PROCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        userTicket: action.payload,
+      };
+    case LOAD_USER_FAIL_TODO:
+    case LOAD_USER_FAIL_PROCESS:
+      return {
+        loading: false,
+        isAuthenticated: false,
+        userTicket: null,
+        error: action.payload,
+      };
     case CLEAR_ERRORS:
       return {
         ...state,

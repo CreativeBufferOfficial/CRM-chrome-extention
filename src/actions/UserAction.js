@@ -2,9 +2,12 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS,
-  LOAD_USER_FAIL,
+  LOAD_USER_REQUEST_TODO,
+  LOAD_USER_SUCCESS_TODO,
+  LOAD_USER_FAIL_TODO,
+  LOAD_USER_REQUEST_PROCESS,
+  LOAD_USER_SUCCESS_PROCESS,
+  LOAD_USER_FAIL_PROCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   // UPDATE_PROFILE_REQUEST,
@@ -16,7 +19,7 @@ import {
   CLEAR_ERRORS,
 } from '../constants/UserConstant';
 import axios from 'axios';
-import { callAPIWithoutAuth } from '../utlis/Apiutils';
+import { callAPI, callAPIWithoutAuth } from '../utlis/Apiutils';
 import { apiUrls } from '../utlis/ApiUrl';
 
 //Login
@@ -43,23 +46,47 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 //Load User --  userDetails
-export const loadUser = () => async (dispatch) => {
+export const loadUserTodo = () => async (dispatch) => {
   try {
-    dispatch({ type: LOAD_USER_REQUEST });
+    dispatch({ type: LOAD_USER_REQUEST_TODO });
+
+    // const { data } = await axios.get(`/api/v1/me`);
+
+    const data = await callAPI(`${apiUrls.ticketStatus}${2}`, 'get');
+
+    console.log(data.data.projectTasks);
+
+    dispatch({ type: LOAD_USER_SUCCESS_TODO, payload: data.data.projectTasks });
+  } catch (error) {
+    dispatch({
+      type: LOAD_USER_FAIL_TODO,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//Load User --  userDetails
+export const loadUserProcess = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOAD_USER_REQUEST_PROCESS });
 
     const { data } = await axios.get(`/api/v1/me`);
-    dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+    dispatch({ type: LOAD_USER_SUCCESS_PROCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    dispatch({
+      type: LOAD_USER_FAIL_PROCESS,
+      payload: error.response.data.message,
+    });
   }
 };
 
 //Logout User
 export const logout = () => async (dispatch) => {
   try {
-    const config = { headers: { 'Content-Type': 'application/json' } };
+    // const config = { headers: { 'Content-Type': 'application/json' } };
     console.log('logout hitting');
-    await axios.post(`https://crm.creativebuffer.com/api/logout`, config);
+    await callAPI(apiUrls.logout, 'post');
+    // await axios.post(`https://crm.creativebuffer.com/api/logout`, config);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error });

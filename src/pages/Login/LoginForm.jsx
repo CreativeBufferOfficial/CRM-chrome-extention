@@ -24,12 +24,6 @@ const LoginForm = ({ isAuthenticated, error }) => {
     }
     if (isAuthenticated === false) {
       setFailMessage(true);
-      // const time = setTimeout(() => {
-      // }, 850);
-
-      // return () => {
-      //   clearInterval(time);
-      // };
     }
   }, [dispatch, error, isAuthenticated]);
 

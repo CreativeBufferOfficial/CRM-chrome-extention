@@ -6,18 +6,20 @@ import { defaultConfig } from './config';
 export const callAPI = async (
   path,
   method,
-  params,
+  // params,
   data = null,
   options = {},
   headersObj = {}
 ) => {
   const API_ROOT = defaultConfig.baseAPIUrl + 'api/';
   const url = API_ROOT + path;
+  console.log(`inside API utiles ${localStorage.getItem('accessToken')}`);
 
   const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    Authorization: `Bearer ${await localStorage.getItem('accessToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+
     // AuthKey: await localStorage.getItem('authkey'),
     ...headersObj,
   };
@@ -25,7 +27,7 @@ export const callAPI = async (
   return axios({
     method,
     url,
-    params,
+    // params,
     // paramsSerializer: (paramObject) => Qs.stringify(paramObject, serializerConfig),
     data,
     headers,
