@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from './Homepage.module.css';
 import logo from '../../assets/task_list/top_logo.png';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
 import UserData from './UserData';
 import { logout, clearErrors, loadUserTodo } from '../../actions/UserAction';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,13 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { removeAuth } from '../../utlis/auth';
 import { apiUrls } from '../../utlis/ApiUrl';
 import { defaultConfig } from '../../utlis/config';
-import userIcon from '../../assets/task_list/user_icon.png';
+// import userIcon from '../../assets/task_list/user_icon.png';
 const Homepage = () => {
-  const { error, user } = useSelector((state) => state.user);
-  const { ticket } = useSelector((state) => state.ticket);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { error, user } = useSelector((state) => state.user);
+  const { ticket } = useSelector((state) => state.ticket);
 
   const todayTab = useRef(null);
   const monthTab = useRef(null);
@@ -28,14 +22,14 @@ const Homepage = () => {
   const [todayTabActive, setTodayTabActive] = useState(true);
   const [monthTabActive, setMonthTabActive] = useState(false);
 
-  console.log(`User ${JSON.stringify(user)}`);
+  // console.log(`User ${JSON.stringify(user)}`);
 
   // console.log(`user ${JSON.stringify(user.access_token)}`);
 
   //TODO: FIXME:
   const id = user?.id;
   const token = user?.access_token;
-  console.log(token);
+  // console.log(token);
   setSession(token);
 
   const isloggedIn = localStorage.getItem('isAuthenticated');
@@ -48,13 +42,13 @@ const Homepage = () => {
     if (isloggedIn === null) {
       navigate('/');
     }
-    dispatch(loadUserTodo());
-  }, [dispatch, error, navigate, isloggedIn]);
+    // dispatch(loadUserTodo());
+  }, [dispatch, error, navigate, isloggedIn, todayTabActive, monthTabActive]);
 
   console.log(`Home Page ${error} `);
 
-  console.log(` user tickets${JSON.stringify(ticket)}`);
-  console.log(` user tickets${toString(ticket)}`);
+  // console.log(` user tickets${JSON.stringify(ticket)}`);
+  // console.log(` user tickets${toString(ticket)}`);
 
   const logoutHandler = (event) => {
     const action = event.target.value;
@@ -73,28 +67,6 @@ const Homepage = () => {
     }
   };
 
-  const switchTabs = (e, tab) => {
-    if (tab === 'today') {
-      switcherTab.current.classList.add(classes.shiftToNeutral);
-      switcherTab.current.classList.remove(classes.shiftToRight);
-
-      monthTab.current.classList.remove(classes.shiftToNeutralForm);
-      todayTab.current.classList.remove(classes.shiftToLeft);
-      setTodayTabActive(true);
-      setMonthTabActive(false);
-    }
-
-    if (tab === 'month') {
-      switcherTab.current.classList.add(classes.shiftToRight);
-      switcherTab.current.classList.remove(classes.shiftToNeutral);
-
-      monthTab.current.classList.add(classes.shiftToNeutralForm);
-      todayTab.current.classList.add(classes.shiftToLeft);
-      setTodayTabActive(false);
-      setMonthTabActive(true);
-    }
-  };
-
   const getYear = (date) => {
     return date.getFullYear();
   };
@@ -106,11 +78,35 @@ const Homepage = () => {
     let day = date.getDate();
     return day < 10 ? '0' + day : '' + day;
   };
-
   const today = new Date();
-  const date =
-    today.getFullYear() + '-' + formatmonth(today) + '-' + today.getDate();
-  // console.log(date);
+  let date =
+    today.getFullYear() + '-' + formatmonth(today) + '-' + formatDay(today);
+  // console.log('@@@@@@@');
+  const switchTabs = (e, tab) => {
+    if (tab === 'today') {
+      switcherTab.current.classList.add(classes.shiftToNeutral);
+      switcherTab.current.classList.remove(classes.shiftToRight);
+
+      monthTab.current.classList.remove(classes.shiftToNeutralForm);
+      todayTab.current.classList.remove(classes.shiftToLeft);
+      setTodayTabActive(true);
+      setMonthTabActive(false);
+      console.log('todayClick');
+      // date =today.getFullYear() + '-' + formatmonth(today) + '-' + today.getDate();
+    }
+
+    if (tab === 'month') {
+      switcherTab.current.classList.add(classes.shiftToRight);
+      switcherTab.current.classList.remove(classes.shiftToNeutral);
+
+      monthTab.current.classList.add(classes.shiftToNeutralForm);
+      todayTab.current.classList.add(classes.shiftToLeft);
+      setTodayTabActive(false);
+      setMonthTabActive(true);
+      console.log('monthClick');
+      // date = undefined;
+    }
+  };
 
   const newDate = new Date();
   const StartDate = new Date(newDate.getFullYear(), newDate.getMonth(), 1);
@@ -158,10 +154,13 @@ const Homepage = () => {
 
             <div>
               <div className={classes.todayTab} ref={todayTab}>
-                <UserData today={date} />
+                <UserData today={todayTab ? date : undefined} />
               </div>
               <div className={classes.monthTab} ref={monthTab}>
-                <UserData />
+                <UserData
+                  fromDate={monthTab ? fromDate : undefined}
+                  toDate={monthTab ? toDate : undefined}
+                />
               </div>
             </div>
           </div>

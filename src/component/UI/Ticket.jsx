@@ -6,8 +6,8 @@ import highArrowIcon from '../../assets/task_list/high_arrow.png';
 import userIcon from '../../assets/task_list/user.png';
 import commentIcon from '../../assets/task_list/comment.png';
 
-const Ticket = ({ onTicketDetailsHandler, onTicketStatusUpdate }) => {
-  // console.log(`id ${id}`);
+const Ticket = (props) => {
+  const { id, title, onTicketDetailsHandler, onTicketStatusUpdate } = props;
   return (
     <div className="background mt-3">
       <Card>
@@ -15,8 +15,8 @@ const Ticket = ({ onTicketDetailsHandler, onTicketStatusUpdate }) => {
           <div className={classes.ticket_row}>
             <div className={classes.ticket_item}>
               <img src={ticketIcon} alt="ticket_icon" />
-              {/* <p>{id}</p> */}
-              <p>2003 </p>
+              <p>{id}</p>
+              {/* <p>2003 </p> */}
             </div>
             <div className={classes.ticket_item}>
               <img src={highArrowIcon} alt="arrow_icon" />
@@ -30,7 +30,7 @@ const Ticket = ({ onTicketDetailsHandler, onTicketStatusUpdate }) => {
                 onTicketDetailsHandler(2410);
               }}
             >
-              Doctor Home Screen
+              {title}
             </p>
           </div>
 
@@ -55,7 +55,6 @@ const Ticket = ({ onTicketDetailsHandler, onTicketStatusUpdate }) => {
                 onTicketStatusUpdate(2410, event.target.value);
               }}
             >
-              <option value="0">Demo</option>
               <option value="1">Todo</option>
               <option value="2">In Progress</option>
               <option value="3">Testing</option>

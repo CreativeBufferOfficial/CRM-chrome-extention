@@ -13,20 +13,42 @@ import { apiUrls } from '../../utlis/ApiUrl';
 
 const UserData = ({ today, fromDate, toDate }) => {
   const dispatch = useDispatch();
+  const { ticket } = useSelector((state) => state.ticket);
   const [todo, setTodo] = useState(true);
   const [process, setInProcess] = useState(false);
 
-  const { ticket } = useSelector((state) => state.ticket);
+  // console.log(`Inside UserData ${JSON.stringify(ticket)}`);
+  // console.log(`Inside UserData ${JSON.parse(JSON.stringify(ticket))}`);
 
-  console.log(`Inside UserData ${JSON.stringify(ticket)}`);
-  console.log(`Inside UserData ${ticket}`);
+  // if (ticket !== null) {
+  // console.log(ticket && ticket.data[0]?.deadline);
+  // }
   // const array = [...ticket];
   // console.log(array);
+
   useEffect(() => {
+    // dispatch(loadUserTodo(1, '2023-04-18'));
+
     if (todo === true) {
-      dispatch(loadUserTodo(1, today));
+      console.log(`Date${today}`);
+      if (today !== undefined) {
+        console.log('todo today ');
+        dispatch(loadUserTodo(1, today));
+      } else if (fromDate !== undefined && toDate !== undefined) {
+        console.log('todo month ');
+        dispatch(loadUserTodo(1, null, fromDate, toDate));
+      }
     } else if (process === true) {
-      dispatch(loadUserTodo(1, fromDate, toDate));
+      console.log(`Date${today}`);
+
+      if (today !== undefined) {
+        console.log('inProcess Today');
+
+        dispatch(loadUserTodo(2, today));
+      } else if (fromDate !== undefined && toDate !== undefined) {
+        console.log('inProcess month');
+        dispatch(loadUserTodo(2, null, fromDate, toDate));
+      }
     }
   }, [dispatch, todo, process, today, fromDate, toDate]);
 
@@ -52,6 +74,9 @@ const UserData = ({ today, fromDate, toDate }) => {
     dispatch(updateTicketStatus(ticket_id, status));
   };
 
+  if (ticket !== undefined) {
+    console.log(ticket.data);
+  }
   return (
     <>
       <div>
@@ -61,20 +86,28 @@ const UserData = ({ today, fromDate, toDate }) => {
             <span>2</span>
           </p>
           <p onClick={processHandler} className={classes.inProcess}>
-            In Process <span>2</span>{' '}
+            In Process <span>2</span>
             <span className={process ? classes.edge2 : ''}></span>
           </p>
         </div>
 
         <div className={classes.all_ticket}>
-          {/* {array.map((element) => {
-            return <Ticket id={element.id} />;
-          })} */}
+          {/* {ticket &&
+            ticket.data.map((element) => {
+              return (
+                <Ticket
+                  key={element.id}
+                  onTicketDetailsHandler={ticketDetailsHandler}
+                  onTicketStatusUpdate={updateTicket}
+                  id={element.id}
+                  title={element.title}
+                />
+              );
+            })} */}
           <Ticket
             onTicketDetailsHandler={ticketDetailsHandler}
             onTicketStatusUpdate={updateTicket}
           />
-          hello
         </div>
       </div>
     </>

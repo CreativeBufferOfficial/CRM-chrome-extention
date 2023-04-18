@@ -48,18 +48,19 @@ export const login = (email, password) => async (dispatch) => {
 
 //Load User --  userDetails
 export const loadUserTodo =
-  (status, date, fromDate, toDate) => async (dispatch) => {
+  (status, today, fromDate, toDate) => async (dispatch) => {
+    console.log('inside api call');
     try {
       dispatch({ type: LOAD_USER_REQUEST_TODO });
       let data;
       // const { data } = await axios.get(`/api/v1/me`);
-      if (date && status) {
-        console.log(status, date);
+      if (status && today) {
+        console.log(status, today);
         data = await callAPI(
-          `${apiUrls.ticketStatus}${status}?todayDate=${date}`,
+          `${apiUrls.ticketStatus}${status}?todayDate=${today}`,
           'get'
         );
-      } else if (fromDate && status && toDate) {
+      } else if (status && fromDate && toDate) {
         data = await callAPI(
           `${apiUrls.ticketStatus}${status}?fromDate=${fromDate}&toDate=${toDate}`,
           'get'
@@ -69,7 +70,7 @@ export const loadUserTodo =
 
       dispatch({
         type: LOAD_USER_SUCCESS_TODO,
-        payload: data.data,
+        payload: data.data.projectTasks,
       });
     } catch (error) {
       dispatch({
@@ -136,7 +137,7 @@ export const updateTicketStatus = (ticket_id, status) => async (dispatch) => {
     // const config = { headers: { 'Content-Type': 'application/json' } };
     const data = await callAPI(
       `${apiUrls.updateTicketStatus}${ticket_id}`,
-      'put',
+      'post',
       {
         status,
       }
