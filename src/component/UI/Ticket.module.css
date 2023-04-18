@@ -30,6 +30,9 @@
   margin-top: 5px;
   width: 73vw;
 }
+.taskname {
+  cursor: pointer;
+}
 
 /* .ticket_dropdown{
 width: 30vw;

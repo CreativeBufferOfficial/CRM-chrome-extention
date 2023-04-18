@@ -1,23 +1,80 @@
-import React, { useRef } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
+import React, { useRef, useState, useEffect } from 'react';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+// import Nav from 'react-bootstrap/Nav';
+// import Tab from 'react-bootstrap/Tab';
 import Ticket from '../../component/UI/Ticket';
 import classes from './UserData.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadUserTodo, updateTicketStatus } from '../../actions/UserAction';
+import { defaultConfig } from '../../utlis/config';
+import { apiUrls } from '../../utlis/ApiUrl';
 
-const UserData = () => {
+const UserData = ({ today, fromDate, toDate }) => {
+  const dispatch = useDispatch();
+  const [todo, setTodo] = useState(true);
+  const [process, setInProcess] = useState(false);
+
+  const { ticket } = useSelector((state) => state.ticket);
+
+  console.log(`Inside UserData ${JSON.stringify(ticket)}`);
+  console.log(`Inside UserData ${ticket}`);
+  // const array = [...ticket];
+  // console.log(array);
+  useEffect(() => {
+    if (todo === true) {
+      dispatch(loadUserTodo(1, today));
+    } else if (process === true) {
+      dispatch(loadUserTodo(1, fromDate, toDate));
+    }
+  }, [dispatch, todo, process, today, fromDate, toDate]);
+
+  const todoHandler = () => {
+    setTodo(true);
+    setInProcess(false);
+  };
+
+  const processHandler = () => {
+    setTodo(false);
+    setInProcess(true);
+  };
+
+  const ticketDetailsHandler = (ticket_id) => {
+    const API_ROOT = defaultConfig.baseAPIUrl;
+    const url = API_ROOT + apiUrls.ticketDetails + ticket_id;
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+  };
+
+  const updateTicket = (ticket_id, status) => {
+    console.log(ticket_id, status);
+    dispatch(updateTicketStatus(ticket_id, status));
+  };
+
   return (
     <>
       <div>
         <div className={classes.status_bar}>
-          <p>Todo</p>
-          <p>In Process</p>
+          <p onClick={todoHandler} className={classes.todo}>
+            <span className={todo ? classes.edge : ''}></span> Todo
+            <span>2</span>
+          </p>
+          <p onClick={processHandler} className={classes.inProcess}>
+            In Process <span>2</span>{' '}
+            <span className={process ? classes.edge2 : ''}></span>
+          </p>
         </div>
 
-        <div>
-          <Ticket />
+        <div className={classes.all_ticket}>
+          {/* {array.map((element) => {
+            return <Ticket id={element.id} />;
+          })} */}
+          <Ticket
+            onTicketDetailsHandler={ticketDetailsHandler}
+            onTicketStatusUpdate={updateTicket}
+          />
+          hello
         </div>
       </div>
     </>

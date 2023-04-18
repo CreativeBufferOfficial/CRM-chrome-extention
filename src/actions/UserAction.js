@@ -13,9 +13,9 @@ import {
   // UPDATE_PROFILE_REQUEST,
   // UPDATE_PROFILE_SUCCESS,
   // UPDATE_PROFILE_FAIL,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL,
+  UPDATE_TICKET_REQUEST,
+  UPDATE_TICKET_SUCCESS,
+  UPDATE_TICKET_FAIL,
   CLEAR_ERRORS,
 } from '../constants/UserConstant';
 import axios from 'axios';
@@ -38,6 +38,7 @@ export const login = (email, password) => async (dispatch) => {
       email,
       password,
     });
+    console.log(data.data);
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.data });
   } catch (error) {
@@ -46,32 +47,49 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 //Load User --  userDetails
-export const loadUserTodo = () => async (dispatch) => {
-  try {
-    dispatch({ type: LOAD_USER_REQUEST_TODO });
+export const loadUserTodo =
+  (status, date, fromDate, toDate) => async (dispatch) => {
+    try {
+      dispatch({ type: LOAD_USER_REQUEST_TODO });
+      let data;
+      // const { data } = await axios.get(`/api/v1/me`);
+      if (date && status) {
+        console.log(status, date);
+        data = await callAPI(
+          `${apiUrls.ticketStatus}${status}?todayDate=${date}`,
+          'get'
+        );
+      } else if (fromDate && status && toDate) {
+        data = await callAPI(
+          `${apiUrls.ticketStatus}${status}?fromDate=${fromDate}&toDate=${toDate}`,
+          'get'
+        );
+      }
+      console.log(data.data.projectTasks);
 
-    // const { data } = await axios.get(`/api/v1/me`);
-
-    const data = await callAPI(`${apiUrls.ticketStatus}${2}`, 'get');
-
-    console.log(data.data.projectTasks);
-
-    dispatch({ type: LOAD_USER_SUCCESS_TODO, payload: data.data.projectTasks });
-  } catch (error) {
-    dispatch({
-      type: LOAD_USER_FAIL_TODO,
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({
+        type: LOAD_USER_SUCCESS_TODO,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: LOAD_USER_FAIL_TODO,
+        payload: error,
+      });
+    }
+  };
 
 //Load User --  userDetails
 export const loadUserProcess = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST_PROCESS });
 
-    const { data } = await axios.get(`/api/v1/me`);
-    dispatch({ type: LOAD_USER_SUCCESS_PROCESS, payload: data.user });
+    // const { data } = await axios.get(`/api/v1/me`);
+
+    const data = await callAPI(`${apiUrls.ticketStatus}${1}`, 'get');
+
+    console.log(data.data.projectTasks.projectTasks);
+    dispatch({ type: LOAD_USER_SUCCESS_PROCESS, payload: data.data });
   } catch (error) {
     dispatch({
       type: LOAD_USER_FAIL_PROCESS,
@@ -111,22 +129,32 @@ export const logout = () => async (dispatch) => {
 // };
 
 // Update User
-export const updateUser = (id, userData) => async (dispatch) => {
+export const updateTicketStatus = (ticket_id, status) => async (dispatch) => {
   try {
-    dispatch({ type: UPDATE_USER_REQUEST });
-
-    const config = { headers: { 'Content-Type': 'application/json' } };
-
-    const { data } = await axios.put(
-      `/api/v1/admin/user/${id}`,
-      userData,
-      config
+    dispatch({ type: UPDATE_TICKET_REQUEST });
+    console.log(ticket_id, status);
+    // const config = { headers: { 'Content-Type': 'application/json' } };
+    const data = await callAPI(
+      `${apiUrls.updateTicketStatus}${ticket_id}`,
+      'put',
+      {
+        status,
+      }
     );
 
-    dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
+    // const { data } = await axios.put(
+    //   `/api/v1/admin/user/${id}`,
+    //   userData,
+    //   config
+    // );
+
+    console.log(data);
+    console.log(data.data.message);
+
+    dispatch({ type: UPDATE_TICKET_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: UPDATE_USER_FAIL,
+      type: UPDATE_TICKET_FAIL,
       payload: error.response.data.message,
     });
   }

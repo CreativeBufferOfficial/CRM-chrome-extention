@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from './Homepage.module.css';
 import logo from '../../assets/task_list/top_logo.png';
 import Container from 'react-bootstrap/Container';
@@ -17,18 +17,22 @@ import { defaultConfig } from '../../utlis/config';
 import userIcon from '../../assets/task_list/user_icon.png';
 const Homepage = () => {
   const { error, user } = useSelector((state) => state.user);
-  const { userTicket } = useSelector((state) => state.ticket);
+  const { ticket } = useSelector((state) => state.ticket);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loginTab = useRef(null);
-  const registerTab = useRef(null);
+  const todayTab = useRef(null);
+  const monthTab = useRef(null);
   const switcherTab = useRef(null);
+  const [todayTabActive, setTodayTabActive] = useState(true);
+  const [monthTabActive, setMonthTabActive] = useState(false);
 
-  console.log(user);
-  console.log(` user tickets${JSON.stringify(userTicket)}`);
+  console.log(`User ${JSON.stringify(user)}`);
+
   // console.log(`user ${JSON.stringify(user.access_token)}`);
+
+  //TODO: FIXME:
   const id = user?.id;
   const token = user?.access_token;
   console.log(token);
@@ -49,6 +53,9 @@ const Homepage = () => {
 
   console.log(`Home Page ${error} `);
 
+  console.log(` user tickets${JSON.stringify(ticket)}`);
+  console.log(` user tickets${toString(ticket)}`);
+
   const logoutHandler = (event) => {
     const action = event.target.value;
     console.log('htting logout handler');
@@ -67,22 +74,55 @@ const Homepage = () => {
   };
 
   const switchTabs = (e, tab) => {
-    if (tab === 'login') {
+    if (tab === 'today') {
       switcherTab.current.classList.add(classes.shiftToNeutral);
       switcherTab.current.classList.remove(classes.shiftToRight);
 
-      registerTab.current.classList.remove(classes.shiftToNeutralForm);
-      loginTab.current.classList.remove(classes.shiftToLeft);
+      monthTab.current.classList.remove(classes.shiftToNeutralForm);
+      todayTab.current.classList.remove(classes.shiftToLeft);
+      setTodayTabActive(true);
+      setMonthTabActive(false);
     }
 
-    if (tab === 'register') {
+    if (tab === 'month') {
       switcherTab.current.classList.add(classes.shiftToRight);
       switcherTab.current.classList.remove(classes.shiftToNeutral);
 
-      registerTab.current.classList.add(classes.shiftToNeutralForm);
-      loginTab.current.classList.add(classes.shiftToLeft);
+      monthTab.current.classList.add(classes.shiftToNeutralForm);
+      todayTab.current.classList.add(classes.shiftToLeft);
+      setTodayTabActive(false);
+      setMonthTabActive(true);
     }
   };
+
+  const getYear = (date) => {
+    return date.getFullYear();
+  };
+  const formatmonth = (date) => {
+    let month = date.getMonth() + 1;
+    return month < 10 ? '0' + month : '' + month;
+  };
+  const formatDay = (date) => {
+    let day = date.getDate();
+    return day < 10 ? '0' + day : '' + day;
+  };
+
+  const today = new Date();
+  const date =
+    today.getFullYear() + '-' + formatmonth(today) + '-' + today.getDate();
+  // console.log(date);
+
+  const newDate = new Date();
+  const StartDate = new Date(newDate.getFullYear(), newDate.getMonth(), 1);
+  const lastDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
+
+  const year = getYear(StartDate);
+  const month = formatmonth(StartDate);
+  const firstDay = formatDay(StartDate);
+  const lastDay = formatDay(lastDate);
+
+  const fromDate = `${year}-${month}-${firstDay}`;
+  const toDate = `${year}-${month}-${lastDay}`;
 
   return (
     <>
@@ -101,21 +141,26 @@ const Homepage = () => {
           </div>
         </div>
 
-        <div className={classes.LoginSignUpContainer}>
-          <div className={classes.LoginSignUpBox}>
+        <div className={classes.container}>
+          <div className={classes.box}>
             <div>
-              <div className={classes.login_signUp_toggle}>
-                <p onClick={(e) => switchTabs(e, 'login')}>Today</p>
-                <p onClick={(e) => switchTabs(e, 'register')}>This Month</p>
+              <div className={classes.toggle}>
+                <p
+                  onClick={(e) => switchTabs(e, 'today')}
+                  className={classes.toggleTodo}
+                >
+                  Today
+                </p>
+                <p onClick={(e) => switchTabs(e, 'month')}>This Month</p>
               </div>
               <button ref={switcherTab}></button>
             </div>
 
             <div>
-              <div className={classes.loginForm} ref={loginTab}>
-                <UserData />
+              <div className={classes.todayTab} ref={todayTab}>
+                <UserData today={date} />
               </div>
-              <div className={classes.signUpForm} ref={registerTab}>
+              <div className={classes.monthTab} ref={monthTab}>
                 <UserData />
               </div>
             </div>

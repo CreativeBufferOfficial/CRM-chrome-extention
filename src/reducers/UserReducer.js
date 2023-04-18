@@ -10,14 +10,14 @@ import {
   LOAD_USER_FAIL_PROCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-  UPDATE_PROFILE_REQUEST,
-  UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL,
-  UPDATE_PROFILE_RESET,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL,
-  UPDATE_USER_RESET,
+  // UPDATE_PROFILE_REQUEST,
+  // UPDATE_PROFILE_SUCCESS,
+  // UPDATE_PROFILE_FAIL,
+  // UPDATE_PROFILE_RESET,
+  UPDATE_TICKET_REQUEST,
+  UPDATE_TICKET_SUCCESS,
+  UPDATE_TICKET_FAIL,
+  UPDATE_TICKET_RESET,
   CLEAR_ERRORS,
 } from '../constants/UserConstant';
 
@@ -68,7 +68,7 @@ export const userReducer = (state = { user: {} }, action) => {
   }
 };
 
-export const userTicketReducer = (state = { userTicket: {} }, action) => {
+export const userTicketReducer = (state = { ticket: {} }, action) => {
   switch (action.type) {
     case LOAD_USER_REQUEST_TODO:
     case LOAD_USER_REQUEST_PROCESS:
@@ -82,14 +82,14 @@ export const userTicketReducer = (state = { userTicket: {} }, action) => {
         ...state,
         loading: false,
         isAuthenticated: true,
-        userTicket: action.payload,
+        ticket: action.payload,
       };
     case LOAD_USER_FAIL_TODO:
     case LOAD_USER_FAIL_PROCESS:
       return {
         loading: false,
         isAuthenticated: false,
-        userTicket: null,
+        ticket: null,
         error: action.payload,
       };
     case CLEAR_ERRORS:
@@ -103,32 +103,32 @@ export const userTicketReducer = (state = { userTicket: {} }, action) => {
   }
 };
 
-export const profileReducer = (state = {}, action) => {
+export const statusReducer = (state = {}, action) => {
   switch (action.type) {
-    case UPDATE_PROFILE_REQUEST:
-    case UPDATE_USER_REQUEST:
+    // case UPDATE_PROFILE_REQUEST:
+    case UPDATE_TICKET_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_PROFILE_SUCCESS:
-    case UPDATE_USER_SUCCESS:
+    // case UPDATE_PROFILE_SUCCESS:
+    case UPDATE_TICKET_SUCCESS:
       return {
         ...state,
         loading: false,
         isUpdated: action.payload,
       };
 
-    case UPDATE_PROFILE_FAIL:
-    case UPDATE_USER_FAIL:
+    // case UPDATE_PROFILE_FAIL:
+    case UPDATE_TICKET_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
 
-    case UPDATE_PROFILE_RESET:
-    case UPDATE_USER_RESET:
+    // case UPDATE_PROFILE_RESET:
+    case UPDATE_TICKET_RESET:
       return {
         ...state,
         isUpdated: false,

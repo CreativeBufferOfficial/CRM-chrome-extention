@@ -3,8 +3,6 @@ export const setSession = (accessToken) => {
     console.log('inside session fn');
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('isAuthenticated', 'true');
-  } else {
-    localStorage.removeItem('accessToken');
   }
 };
 

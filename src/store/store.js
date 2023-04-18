@@ -8,14 +8,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import {
   userReducer,
-  profileReducer,
+  statusReducer,
   userTicketReducer,
 } from '../reducers/UserReducer';
 
 const reducer = combineReducers({
   user: userReducer,
   ticket: userTicketReducer,
-  profile: profileReducer,
+  status: statusReducer,
 });
 
 let initialState = {};
