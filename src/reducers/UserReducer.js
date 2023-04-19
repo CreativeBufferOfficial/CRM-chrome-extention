@@ -78,6 +78,7 @@ export const userTicketReducer = (state = { ticket: {} }, action) => {
       };
     case LOAD_USER_SUCCESS_TODO:
     case LOAD_USER_SUCCESS_PROCESS:
+      console.log('inside reducer', action.payload);
       return {
         ...state,
         loading: false,

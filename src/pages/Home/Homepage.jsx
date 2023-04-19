@@ -2,13 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import classes from './Homepage.module.css';
 import logo from '../../assets/task_list/top_logo.png';
 import UserData from './UserData';
-import { logout, clearErrors, loadUserTodo } from '../../actions/UserAction';
+import { logout, clearErrors } from '../../actions/UserAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSession } from '../../utlis/auth';
 import { useNavigate } from 'react-router-dom';
 import { removeAuth } from '../../utlis/auth';
 import { apiUrls } from '../../utlis/ApiUrl';
 import { defaultConfig } from '../../utlis/config';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import userIcon from '../../assets/task_list/user_icon.png';
+import settingIcon from '../../assets/task_list/setting_icon.png';
+import logoutIcon from '../../assets/task_list/logout_icon.png';
+
+import {
+  redirectProfile,
+  redirectSetting,
+  todayDate,
+  toDateMonth,
+  fromDateMonth,
+} from '../../utlis/Helper';
 // import userIcon from '../../assets/task_list/user_icon.png';
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -42,6 +55,9 @@ const Homepage = () => {
     if (isloggedIn === null) {
       navigate('/');
     }
+    if (todayTabActive) {
+    }
+
     // dispatch(loadUserTodo());
   }, [dispatch, error, navigate, isloggedIn, todayTabActive, monthTabActive]);
 
@@ -51,37 +67,50 @@ const Homepage = () => {
   // console.log(` user tickets${toString(ticket)}`);
 
   const logoutHandler = (event) => {
-    const action = event.target.value;
-    console.log('htting logout handler');
-    console.log(action);
-    if (action === 'logout') {
+    console.log(event);
+
+    // const action = event.target.value;
+    // console.log('htting logout handler');
+    console.log(event);
+    if (event === 'logout') {
       dispatch(logout());
       removeAuth();
     }
-    if (action === 'profile') {
-      // const url = `https://crm.creativebuffer.com/profile?${id}`;
-      const API_ROOT = defaultConfig.baseAPIUrl;
-      const url = API_ROOT + apiUrls.profile + id;
-      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-      if (newWindow) newWindow.opener = null;
+    if (event === 'profile') {
+      redirectProfile(id);
+    }
+    if (event === 'setting') {
+      redirectSetting();
     }
   };
 
-  const getYear = (date) => {
-    return date.getFullYear();
-  };
-  const formatmonth = (date) => {
-    let month = date.getMonth() + 1;
-    return month < 10 ? '0' + month : '' + month;
-  };
-  const formatDay = (date) => {
-    let day = date.getDate();
-    return day < 10 ? '0' + day : '' + day;
-  };
-  const today = new Date();
-  let date =
-    today.getFullYear() + '-' + formatmonth(today) + '-' + formatDay(today);
-  // console.log('@@@@@@@');
+  // const today = new Date();
+  // let date =
+  //   today.getFullYear() + '-' + formatmonth(today) + '-' + formatDay(today);
+  // // console.log('@@@@@@@');
+
+  // const newDate = new Date();
+  // const StartDate = new Date(newDate.getFullYear(), newDate.getMonth(), 1);
+  // const lastDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
+
+  // const year = getYear(StartDate);
+  // const month = formatmonth(StartDate);
+  // const firstDay = formatDay(StartDate);
+  // const lastDay = formatDay(lastDate);
+
+  // const fromDate = `${year}-${month}-${firstDay}`;
+  // const toDate = `${year}-${month}-${lastDay}`;
+  let date;
+  let fromDate;
+  let toDate;
+  if (todayTabActive) {
+    date = todayDate();
+  }
+  if (monthTabActive) {
+    fromDate = fromDateMonth();
+    toDate = toDateMonth();
+  }
+
   const switchTabs = (e, tab) => {
     if (tab === 'today') {
       switcherTab.current.classList.add(classes.shiftToNeutral);
@@ -92,6 +121,7 @@ const Homepage = () => {
       setTodayTabActive(true);
       setMonthTabActive(false);
       console.log('todayClick');
+      // date = todayDate();
       // date =today.getFullYear() + '-' + formatmonth(today) + '-' + today.getDate();
     }
 
@@ -104,21 +134,8 @@ const Homepage = () => {
       setTodayTabActive(false);
       setMonthTabActive(true);
       console.log('monthClick');
-      // date = undefined;
     }
   };
-
-  const newDate = new Date();
-  const StartDate = new Date(newDate.getFullYear(), newDate.getMonth(), 1);
-  const lastDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
-
-  const year = getYear(StartDate);
-  const month = formatmonth(StartDate);
-  const firstDay = formatDay(StartDate);
-  const lastDay = formatDay(lastDate);
-
-  const fromDate = `${year}-${month}-${firstDay}`;
-  const toDate = `${year}-${month}-${lastDay}`;
 
   return (
     <>
@@ -129,11 +146,45 @@ const Homepage = () => {
           </div>
 
           <div>
-            <select onChange={logoutHandler}>
-              <option value="username">UserName</option>
-              <option value="profile">Profile</option>
-              <option value="logout">Logout</option>
-            </select>
+            {/* <select className={classes.dropdown} onChange={logoutHandler}>
+              <option value="username">&#xf2bd; UserName</option>
+              <option value="profile">&#xf007; Profile</option>
+              <option value="logout">&#xf14d; 👱‍♂️ Logout</option>
+            </select> */}
+
+            <DropdownButton
+              onSelect={logoutHandler}
+              id="dropdown-basic-button"
+              title="Username"
+              variant="default"
+              className={classes.dropdown}
+            >
+              <Dropdown.Item eventKey="profile">
+                <img
+                  className={classes.dropdown_user}
+                  src={userIcon}
+                  alt="user_icon"
+                />
+                Profile
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="setting">
+                <img
+                  className={classes.dropdown_img}
+                  src={settingIcon}
+                  alt="user_icon"
+                />{' '}
+                Setting
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="logout">
+                <img
+                  className={classes.dropdown_img}
+                  src={logoutIcon}
+                  alt="user_icon"
+                />{' '}
+                Logout
+              </Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
 
@@ -143,11 +194,20 @@ const Homepage = () => {
               <div className={classes.toggle}>
                 <p
                   onClick={(e) => switchTabs(e, 'today')}
-                  className={classes.toggleTodo}
+                  className={
+                    todayTabActive ? classes.toggleTrue : classes.toggleFalse
+                  }
                 >
                   Today
                 </p>
-                <p onClick={(e) => switchTabs(e, 'month')}>This Month</p>
+                <p
+                  onClick={(e) => switchTabs(e, 'month')}
+                  className={
+                    monthTabActive ? classes.toggleTrue : classes.toggleFalse
+                  }
+                >
+                  This Month
+                </p>
               </div>
               <button ref={switcherTab}></button>
             </div>
@@ -167,59 +227,6 @@ const Homepage = () => {
         </div>
       </div>
     </>
-    // <Container className={classes.main}>
-    //   <Row>
-    //     <Col>
-    //       <div className={classes.home_logo}>
-    //         <img src={logo} alt="logo" />
-    //       </div>
-    //     </Col>
-    //     <Col>
-    //       <div>
-    //         <select onChange={logoutHandler}>
-    //           <option value="">UserName</option>
-    //           <option value="profile">Profile</option>
-    //           <option value="logout">Logout</option>
-    //         </select>
-    //       </div>
-    //     </Col>
-    //   </Row>
-
-    //   <Row>
-    //     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-    //       <Row>
-    //         <Col>
-    //           <Nav>
-    //             <Nav.Item>
-    //               <Nav.Link eventKey="first" className={classes.text}>
-    //                 Today Task's
-    //               </Nav.Link>
-    //             </Nav.Item>
-    //           </Nav>
-    //         </Col>
-    //         <Col className={classes.tab_today}>
-    //           <Nav variant="pills">
-    //             <Nav.Item>
-    //               <Nav.Link eventKey="second">This Month Task's</Nav.Link>
-    //             </Nav.Item>
-    //           </Nav>
-    //         </Col>
-    //       </Row>
-    //       <Row>
-    //         <Col sm={6}>
-    //           <Tab.Content>
-    //             <Tab.Pane eventKey="first">
-    //               <UserData />
-    //             </Tab.Pane>
-    //             <Tab.Pane eventKey="second">
-    //               <UserData />
-    //             </Tab.Pane>
-    //           </Tab.Content>
-    //         </Col>
-    //       </Row>
-    //     </Tab.Container>
-    //   </Row>
-    // </Container>
   );
 };
 

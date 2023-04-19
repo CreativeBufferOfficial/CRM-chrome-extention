@@ -3,11 +3,27 @@ import Card from 'react-bootstrap/Card';
 import classes from './Ticket.module.css';
 import ticketIcon from '../../assets/task_list/ticket_icon.png';
 import highArrowIcon from '../../assets/task_list/high_arrow.png';
-import userIcon from '../../assets/task_list/user.png';
 import commentIcon from '../../assets/task_list/comment.png';
 
 const Ticket = (props) => {
-  const { id, title, onTicketDetailsHandler, onTicketStatusUpdate } = props;
+  const {
+    id,
+    title,
+    priority,
+    profileImage,
+    count,
+    onTicketDetailsHandler,
+    onTicketStatusUpdate,
+  } = props;
+  let task_priority;
+
+  if (priority === 1) {
+    task_priority = 'High';
+  } else if (priority === 2) {
+    task_priority = 'Medium';
+  } else {
+    task_priority = 'low';
+  }
   return (
     <div className="background mt-3">
       <Card>
@@ -16,11 +32,10 @@ const Ticket = (props) => {
             <div className={classes.ticket_item}>
               <img src={ticketIcon} alt="ticket_icon" />
               <p>{id}</p>
-              {/* <p>2003 </p> */}
             </div>
             <div className={classes.ticket_item}>
               <img src={highArrowIcon} alt="arrow_icon" />
-              <p>High</p>
+              <p>{task_priority}</p>
             </div>
           </div>
 
@@ -36,7 +51,11 @@ const Ticket = (props) => {
 
           <div className={classes.profile_row}>
             <div>
-              <img src={userIcon} alt="profile" />
+              <img
+                className={classes.profile_pic}
+                src={`https://crm.creativebuffer.com/storage/uploads/image/${profileImage}`}
+                alt="profile"
+              />
             </div>
             <div>
               <img
@@ -44,7 +63,7 @@ const Ticket = (props) => {
                 src={commentIcon}
                 alt="comment"
               />
-              <span>3</span>
+              <span>{count}</span>
             </div>
           </div>
 

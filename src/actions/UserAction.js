@@ -18,7 +18,7 @@ import {
   UPDATE_TICKET_FAIL,
   CLEAR_ERRORS,
 } from '../constants/UserConstant';
-import axios from 'axios';
+// import axios from 'axios';
 import { callAPI, callAPIWithoutAuth } from '../utlis/Apiutils';
 import { apiUrls } from '../utlis/ApiUrl';
 
@@ -66,7 +66,7 @@ export const loadUserTodo =
           'get'
         );
       }
-      console.log(data.data.projectTasks);
+      console.log('data hjhj >>', data.data.projectTasks);
 
       dispatch({
         type: LOAD_USER_SUCCESS_TODO,
@@ -80,24 +80,24 @@ export const loadUserTodo =
     }
   };
 
-//Load User --  userDetails
-export const loadUserProcess = () => async (dispatch) => {
-  try {
-    dispatch({ type: LOAD_USER_REQUEST_PROCESS });
+// //Load User --  userDetails
+// export const loadUserProcess = () => async (dispatch) => {
+//   try {
+//     dispatch({ type: LOAD_USER_REQUEST_PROCESS });
 
-    // const { data } = await axios.get(`/api/v1/me`);
+//     // const { data } = await axios.get(`/api/v1/me`);
 
-    const data = await callAPI(`${apiUrls.ticketStatus}${1}`, 'get');
+//     const data = await callAPI(`${apiUrls.ticketStatus}${1}`, 'get');
 
-    console.log(data.data.projectTasks.projectTasks);
-    dispatch({ type: LOAD_USER_SUCCESS_PROCESS, payload: data.data });
-  } catch (error) {
-    dispatch({
-      type: LOAD_USER_FAIL_PROCESS,
-      payload: error.response.data.message,
-    });
-  }
-};
+//     console.log(data.data.projectTasks.projectTasks);
+//     dispatch({ type: LOAD_USER_SUCCESS_PROCESS, payload: data.data });
+//   } catch (error) {
+//     dispatch({
+//       type: LOAD_USER_FAIL_PROCESS,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
 
 //Logout User
 export const logout = () => async (dispatch) => {

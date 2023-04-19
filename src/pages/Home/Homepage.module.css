@@ -9,9 +9,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  overflow-y: hidden;
+  /* position: fixed; */
 }
 /* TODO: */
-.main::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 .main > div {
@@ -20,19 +22,6 @@
 .home_logo {
   margin-right: 50px;
 }
-
-/* .tab_text {
-  font-size: 12px;
-  background: linear-gradient(#8cdb44, #448508);
-  color: black;
-
-}
-.text {
-  color: black;
-}
-.nav {
-  color: white;
-} */
 
 .header {
   display: flex;
@@ -43,16 +32,9 @@
 }
 
 .container {
-  /* width: 100vw;
-  height: 100vh;
-  max-width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: rgb(231, 231, 231); */
-  /* position: fixed; */
-  /* top: 0%;
-  left: 0; */
 }
 
 .box {
@@ -68,8 +50,8 @@
   height: 3vmax;
 }
 .toggle > p {
-  color: rgba(0, 0, 0, 0.678);
-  font: 400 2vmax 'Roboto';
+  /* color: white; */
+  font: 500 2.5vmax 'sans-serif';
   transition: all 0.5s;
   cursor: pointer;
   display: grid;
@@ -78,23 +60,26 @@
   width: 100%;
   margin: 0;
   transition: all 0.5s;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 
-.toggleTodo {
+.toggleTrue {
   background-color: #8cdb44;
+  color: white;
 }
 
-.toggle > p:hover {
-  color: rgb(26, 68, 184);
+.toggleFalse {
+  color: black;
 }
 
 .box > div > button {
   background-color: #8cdb44;
-  height: 3px;
-  width: 50%;
+  height: 10px;
+  width: 8%;
+  margin-top: 10px;
   border: none;
   transition: all 0.5s;
-  /* clip-path: polygon(50% 100%, 100% 0, 0 0); */
+  clip-path: polygon(50% 100%, 100% 0, 0 0);
 }
 
 .todayTab,
@@ -113,16 +98,11 @@
   transform: translateY(-100%) translateX(-100vmax);
 }
 
-/* .loginBtn:hover,
-.signUpBtn:hover {
-  background-color: rgb(179, 66, 46);
-} */
-
 .shiftToLeft {
   transform: translateX(-100%);
 }
 .shiftToNeutral {
-  transform: translateX(0%);
+  transform: translateX(250%);
 }
 
 .shiftToNeutralForm {
@@ -130,7 +110,7 @@
 }
 
 .shiftToRight {
-  transform: translateX(100%);
+  transform: translateX(900%);
 }
 
 .centerEdge {
@@ -141,4 +121,23 @@
   border-radius: 0% !important;
   display: block;
   height: 2vh;
+}
+
+.dropdown {
+  border: none;
+  background-color: white;
+  color: black;
+  /* font-family: 'FontAwesome', 'Second Font name'; */
+}
+.dropdown:hover {
+  background-color: white;
+  color: black;
+  border: none;
+}
+.dropdown_img {
+  margin-right: 10px;
+  margin-left: 5px;
+}
+.dropdown_user {
+  margin-right: 10px;
 }

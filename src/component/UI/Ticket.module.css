@@ -27,13 +27,15 @@
   margin-right: 6px;
 }
 .ticket_status {
-  margin-top: 5px;
-  width: 73vw;
+  margin-top: 6px;
+  width: 70vw;
 }
 .taskname {
   cursor: pointer;
 }
 
-/* .ticket_dropdown{
-width: 30vw;
-} */
+.profile_pic {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}

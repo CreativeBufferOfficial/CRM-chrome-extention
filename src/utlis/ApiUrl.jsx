@@ -4,5 +4,6 @@ export const apiUrls = {
   ticketStatus: 'project/task-board/',
   updateTicketStatus: 'project/update-ticket-status/',
   profile: 'profile?/',
+  setting: 'settings/',
   ticketDetails: 'project/task-detail/',
 };

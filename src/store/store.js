@@ -4,7 +4,7 @@ import {
   applyMiddleware,
 } from 'redux';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 import {
   userReducer,
@@ -12,13 +12,12 @@ import {
   userTicketReducer,
 } from '../reducers/UserReducer';
 
+let initialState = {};
 const reducer = combineReducers({
   user: userReducer,
   ticket: userTicketReducer,
   status: statusReducer,
 });
-
-let initialState = {};
 
 const middleware = [thunk];
 const store = createStore(
