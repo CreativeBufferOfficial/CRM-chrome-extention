@@ -60,11 +60,10 @@ const UserData = ({ today, fromDate, toDate }) => {
         <div className={classes.status_bar}>
           <p onClick={todoHandler} className={classes.todo}>
             <span className={todo ? classes.edge : ''}></span> Todo
-            <span>{ticket?.data?.length > 0 ? ticket?.data?.length : 0}</span>
+            <span> {todo ? ticket?.data?.length : 0}</span>
           </p>
           <p onClick={processHandler} className={classes.inProcess}>
-            In Process{' '}
-            <span>{ticket?.data?.length > 0 ? ticket?.data?.length : 0}</span>
+            In Process <span>{process ? ticket?.data?.length : 0}</span>
             <span className={process ? classes.edge2 : ''}></span>
           </p>
         </div>
