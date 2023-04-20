@@ -22,15 +22,15 @@ const LoginForm = ({ isAuthenticated, error }) => {
       // alert.error(error);
       dispatch(clearErrors());
     }
-    if (isAuthenticated === false) {
-      setFailMessage(true);
-    }
-  }, [dispatch, error, isAuthenticated]);
+  }, [dispatch, error]);
 
   const loginSubmit = (e) => {
     e.preventDefault();
     console.log('logged');
     dispatch(login(loginEmail, loginPassword));
+    if (isAuthenticated === false) {
+      setFailMessage(true);
+    }
   };
 
   const Eye = () => {

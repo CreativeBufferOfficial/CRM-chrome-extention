@@ -20,7 +20,10 @@ const Loginpage = () => {
       console.log('Inside isloggedIn');
       navigate('/home');
     }
-  }, [navigate, isloggedIn]);
+    // if (isAuthenticated === false) {
+    //   localStorage.setItem('isAuthenticated', 'false');
+    // }
+  }, [navigate, isloggedIn, isAuthenticated]);
 
   return (
     <Container fluid className={classes.App}>
@@ -33,7 +36,7 @@ const Loginpage = () => {
         {isAuthenticated ? (
           <LoginSuccess isAuthenticated={isAuthenticated} error={error} />
         ) : (
-          <LoginForm isAuthenticated={isloggedIn} error={error} />
+          <LoginForm isAuthenticated={isAuthenticated} error={error} />
         )}
         {/* <LoginForm /> */}
         {/* <LoginSuccess /> */}
