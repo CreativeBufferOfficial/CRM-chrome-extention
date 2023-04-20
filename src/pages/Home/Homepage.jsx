@@ -119,7 +119,7 @@ const Homepage = () => {
             <DropdownButton
               onSelect={logoutHandler}
               id="dropdown-basic-button"
-              title={userName}
+              title={userName?.slice(0, 10)}
               variant="default"
               className={classes.dropdown}
             >
