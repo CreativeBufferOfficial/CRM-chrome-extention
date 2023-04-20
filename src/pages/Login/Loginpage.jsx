@@ -33,7 +33,7 @@ const Loginpage = () => {
         {isAuthenticated ? (
           <LoginSuccess isAuthenticated={isAuthenticated} error={error} />
         ) : (
-          <LoginForm isAuthenticated={isAuthenticated} error={error} />
+          <LoginForm isAuthenticated={isloggedIn} error={error} />
         )}
         {/* <LoginForm /> */}
         {/* <LoginSuccess /> */}
