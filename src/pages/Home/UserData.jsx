@@ -16,27 +16,25 @@ const UserData = ({ today, fromDate, toDate }) => {
   const [todoCount, setTodoCount] = useState(0);
   const [inProcessCount, setInProcessCount] = useState(0);
 
-  console.log(`Inside UserData ${ticket}`);
-
   useEffect(() => {
     if (todo === true) {
-      console.log(`Date${today}`);
+      // console.log(`Date${today}`);
       if (today !== undefined) {
-        console.log('todo today ');
+        // console.log('todo today ');
         dispatch(loadUserTodo(1, today));
       } else if (fromDate !== undefined && toDate !== undefined) {
-        console.log('todo month ');
+        // console.log('todo month ');
         dispatch(loadUserTodo(1, null, fromDate, toDate));
       }
     } else if (process === true) {
-      console.log(`Date${today}`);
+      // console.log(`Date${today}`);
 
       if (today !== undefined) {
-        console.log('inProcess Today');
+        // console.log('inProcess Today');
 
         dispatch(loadUserTodo(2, today));
       } else if (fromDate !== undefined && toDate !== undefined) {
-        console.log('inProcess month');
+        // console.log('inProcess month');
         dispatch(loadUserTodo(2, null, fromDate, toDate));
       }
     }
@@ -57,13 +55,8 @@ const UserData = ({ today, fromDate, toDate }) => {
   };
 
   const updateTicket = (ticket_id, status) => {
-    console.log(ticket_id, status);
     dispatch(updateTicketStatus(ticket_id, status));
   };
-
-  console.log('ticket >>>', ticket);
-  console.log('todo Count >>>', todoCount);
-  console.log('progress Count >>>', inProcessCount);
 
   return (
     <>
@@ -104,11 +97,6 @@ const UserData = ({ today, fromDate, toDate }) => {
             No ticket in your {todo ? 'todo' : 'In Process'} list
           </p>
         )}
-
-        {/* <Ticket
-          onTicketDetailsHandler={ticketDetailsHandler}
-          onTicketStatusUpdate={updateTicket}
-        /> */}
       </div>
     </>
   );

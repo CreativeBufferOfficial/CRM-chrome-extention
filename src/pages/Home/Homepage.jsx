@@ -22,12 +22,10 @@ import {
   toDateMonth,
   fromDateMonth,
 } from '../../utlis/Helper';
-// import userIcon from '../../assets/task_list/user_icon.png';
 const Homepage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, user } = useSelector((state) => state.user);
-  const { ticket } = useSelector((state) => state.ticket);
+  const { user } = useSelector((state) => state.user);
 
   const todayTab = useRef(null);
   const monthTab = useRef(null);
@@ -35,71 +33,40 @@ const Homepage = () => {
   const [todayTabActive, setTodayTabActive] = useState(true);
   const [monthTabActive, setMonthTabActive] = useState(false);
 
-  // console.log(`User ${JSON.stringify(user)}`);
-
-  // console.log(`user ${JSON.stringify(user.access_token)}`);
-
   //TODO: FIXME:
   const id = user?.id;
+  const name = user?.name;
   const token = user?.access_token;
-  // console.log(token);
-  setSession(token);
-
+  setSession(token, id, name);
   const isloggedIn = localStorage.getItem('isAuthenticated');
+  const userName = localStorage.getItem('name');
+  const userId = localStorage.getItem('id');
 
   useEffect(() => {
-    if (error) {
-      // alert.error(error);
-      dispatch(clearErrors());
-    }
+    // if (error) {
+    // alert.error(error);
+    // dispatch(clearErrors());
+    // }
     if (isloggedIn === null) {
       navigate('/');
     }
     if (todayTabActive) {
     }
-
-    // dispatch(loadUserTodo());
-  }, [dispatch, error, navigate, isloggedIn, todayTabActive, monthTabActive]);
-
-  console.log(`Home Page ${error} `);
-
-  // console.log(` user tickets${JSON.stringify(ticket)}`);
-  // console.log(` user tickets${toString(ticket)}`);
+  }, [dispatch, navigate, isloggedIn, todayTabActive, monthTabActive]);
 
   const logoutHandler = (event) => {
-    console.log(event);
-
-    // const action = event.target.value;
-    // console.log('htting logout handler');
-    console.log(event);
     if (event === 'logout') {
       dispatch(logout());
       removeAuth();
     }
     if (event === 'profile') {
-      redirectProfile(id);
+      redirectProfile(userId);
     }
     if (event === 'setting') {
       redirectSetting();
     }
   };
 
-  // const today = new Date();
-  // let date =
-  //   today.getFullYear() + '-' + formatmonth(today) + '-' + formatDay(today);
-  // // console.log('@@@@@@@');
-
-  // const newDate = new Date();
-  // const StartDate = new Date(newDate.getFullYear(), newDate.getMonth(), 1);
-  // const lastDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
-
-  // const year = getYear(StartDate);
-  // const month = formatmonth(StartDate);
-  // const firstDay = formatDay(StartDate);
-  // const lastDay = formatDay(lastDate);
-
-  // const fromDate = `${year}-${month}-${firstDay}`;
-  // const toDate = `${year}-${month}-${lastDay}`;
   let date;
   let fromDate;
   let toDate;
@@ -120,7 +87,6 @@ const Homepage = () => {
       todayTab.current.classList.remove(classes.shiftToLeft);
       setTodayTabActive(true);
       setMonthTabActive(false);
-      console.log('todayClick');
       // date = todayDate();
       // date =today.getFullYear() + '-' + formatmonth(today) + '-' + today.getDate();
     }
@@ -133,9 +99,13 @@ const Homepage = () => {
       todayTab.current.classList.add(classes.shiftToLeft);
       setTodayTabActive(false);
       setMonthTabActive(true);
-      console.log('monthClick');
     }
   };
+  console.log(
+    `userName >>>>>>>>>>>>>>>>>> ${user?.name ? user?.name : 'user user user'}`
+  );
+  console.log('name>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', userName);
+  console.log('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', userId);
 
   return (
     <>
@@ -146,16 +116,10 @@ const Homepage = () => {
           </div>
 
           <div>
-            {/* <select className={classes.dropdown} onChange={logoutHandler}>
-              <option value="username">&#xf2bd; UserName</option>
-              <option value="profile">&#xf007; Profile</option>
-              <option value="logout">&#xf14d; 👱‍♂️ Logout</option>
-            </select> */}
-
             <DropdownButton
               onSelect={logoutHandler}
               id="dropdown-basic-button"
-              title="Username"
+              title={userName}
               variant="default"
               className={classes.dropdown}
             >

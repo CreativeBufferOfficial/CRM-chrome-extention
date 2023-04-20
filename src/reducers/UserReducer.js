@@ -22,6 +22,8 @@ import {
 } from '../constants/UserConstant';
 
 export const userReducer = (state = { user: {} }, action) => {
+  console.log('satet >> ', state);
+
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -29,6 +31,7 @@ export const userReducer = (state = { user: {} }, action) => {
         // isAuthenticated: false,
       };
     case LOGIN_SUCCESS:
+      console.log(' Login reducer >>>>>', action.payload);
       return {
         ...state,
         loading: false,
@@ -78,7 +81,6 @@ export const userTicketReducer = (state = { ticket: {} }, action) => {
       };
     case LOAD_USER_SUCCESS_TODO:
     case LOAD_USER_SUCCESS_PROCESS:
-      console.log('inside reducer', action.payload);
       return {
         ...state,
         loading: false,
@@ -106,13 +108,11 @@ export const userTicketReducer = (state = { ticket: {} }, action) => {
 
 export const statusReducer = (state = {}, action) => {
   switch (action.type) {
-    // case UPDATE_PROFILE_REQUEST:
     case UPDATE_TICKET_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    // case UPDATE_PROFILE_SUCCESS:
     case UPDATE_TICKET_SUCCESS:
       return {
         ...state,
@@ -120,7 +120,6 @@ export const statusReducer = (state = {}, action) => {
         isUpdated: action.payload,
       };
 
-    // case UPDATE_PROFILE_FAIL:
     case UPDATE_TICKET_FAIL:
       return {
         ...state,
@@ -128,7 +127,6 @@ export const statusReducer = (state = {}, action) => {
         error: action.payload,
       };
 
-    // case UPDATE_PROFILE_RESET:
     case UPDATE_TICKET_RESET:
       return {
         ...state,

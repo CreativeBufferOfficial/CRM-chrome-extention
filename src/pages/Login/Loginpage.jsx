@@ -17,7 +17,6 @@ const Loginpage = () => {
 
   useEffect(() => {
     if (isloggedIn === 'true') {
-      console.log('Inside isloggedIn');
       navigate('/home');
     }
   }, [navigate, isloggedIn, isAuthenticated]);

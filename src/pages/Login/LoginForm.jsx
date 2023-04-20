@@ -21,14 +21,12 @@ const LoginForm = ({ isAuthenticated, error }) => {
     if (error === 'UnAuthorized') {
       setFailMessage(true);
 
-      dispatch(clearErrors());
+      // dispatch(clearErrors());
     }
   }, [dispatch, error]);
 
-  console.log(`error>>>>>>>>${error}`);
   const loginSubmit = (e) => {
     e.preventDefault();
-    console.log('logged');
     dispatch(login(loginEmail, loginPassword));
   };
 

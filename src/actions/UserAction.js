@@ -49,13 +49,11 @@ export const login = (email, password) => async (dispatch) => {
 //Load User --  userDetails
 export const loadUserTodo =
   (status, today, fromDate, toDate) => async (dispatch) => {
-    console.log('inside api call');
     try {
       dispatch({ type: LOAD_USER_REQUEST_TODO });
       let data;
       // const { data } = await axios.get(`/api/v1/me`);
       if (status && today) {
-        console.log(status, today);
         data = await callAPI(
           `${apiUrls.ticketStatus}${status}?todayDate=${today}`,
           'get'
@@ -66,7 +64,6 @@ export const loadUserTodo =
           'get'
         );
       }
-      console.log('data hjhj >>', data.data.projectTasks);
 
       dispatch({
         type: LOAD_USER_SUCCESS_TODO,
@@ -75,7 +72,7 @@ export const loadUserTodo =
     } catch (error) {
       dispatch({
         type: LOAD_USER_FAIL_TODO,
-        payload: error,
+        payload: error.response.data.message,
       });
     }
   };
@@ -103,7 +100,6 @@ export const loadUserTodo =
 export const logout = () => async (dispatch) => {
   try {
     // const config = { headers: { 'Content-Type': 'application/json' } };
-    console.log('logout hitting');
     await callAPI(apiUrls.logout, 'post');
     // await axios.post(`https://crm.creativebuffer.com/api/logout`, config);
     dispatch({ type: LOGOUT_SUCCESS });
@@ -133,7 +129,6 @@ export const logout = () => async (dispatch) => {
 export const updateTicketStatus = (ticket_id, status) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_TICKET_REQUEST });
-    console.log(ticket_id, status);
     // const config = { headers: { 'Content-Type': 'application/json' } };
     const data = await callAPI(
       `${apiUrls.updateTicketStatus}${ticket_id}`,
@@ -148,9 +143,6 @@ export const updateTicketStatus = (ticket_id, status) => async (dispatch) => {
     //   userData,
     //   config
     // );
-
-    console.log(data);
-    console.log(data.data.message);
 
     dispatch({ type: UPDATE_TICKET_SUCCESS, payload: data });
   } catch (error) {
