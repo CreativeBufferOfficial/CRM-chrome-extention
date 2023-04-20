@@ -20,9 +20,6 @@ const Loginpage = () => {
       console.log('Inside isloggedIn');
       navigate('/home');
     }
-    // if (isAuthenticated === false) {
-    //   localStorage.setItem('isAuthenticated', 'false');
-    // }
   }, [navigate, isloggedIn, isAuthenticated]);
 
   return (
@@ -38,8 +35,6 @@ const Loginpage = () => {
         ) : (
           <LoginForm isAuthenticated={isAuthenticated} error={error} />
         )}
-        {/* <LoginForm /> */}
-        {/* <LoginSuccess /> */}
       </Row>
     </Container>
   );
