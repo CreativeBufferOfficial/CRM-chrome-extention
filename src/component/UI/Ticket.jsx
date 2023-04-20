@@ -12,6 +12,7 @@ const Ticket = (props) => {
     priority,
     profileImage,
     count,
+    status,
     onTicketDetailsHandler,
     onTicketStatusUpdate,
   } = props;
@@ -24,6 +25,7 @@ const Ticket = (props) => {
   } else {
     task_priority = 'low';
   }
+
   return (
     <div className="background mt-3">
       <Card>
@@ -71,13 +73,15 @@ const Ticket = (props) => {
             <select
               className={classes.ticket_status}
               onChange={(event) => {
-                onTicketStatusUpdate(2410, event.target.value);
+                onTicketStatusUpdate(id, event.target.value);
               }}
+              value={status}
             >
               <option value="1">Todo</option>
               <option value="2">In Progress</option>
-              <option value="3">Testing</option>
-              <option value="4">Complete</option>
+              <option value="3">Development complete</option>
+              <option value="4">Testing</option>
+              <option value="5">Complete</option>
             </select>
           </div>
         </Card.Body>

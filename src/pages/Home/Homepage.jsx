@@ -173,7 +173,7 @@ const Homepage = () => {
                   src={settingIcon}
                   alt="user_icon"
                 />{' '}
-                Setting
+                Change Password
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="logout">

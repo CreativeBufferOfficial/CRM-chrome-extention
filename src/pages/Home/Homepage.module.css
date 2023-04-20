@@ -15,6 +15,7 @@
 /* TODO: */
 *::-webkit-scrollbar {
   display: none;
+  overflow-y: none;
 }
 .main > div {
   margin-top: 20px;
@@ -51,7 +52,7 @@
 }
 .toggle > p {
   /* color: white; */
-  font: 500 2.5vmax 'sans-serif';
+  font: 500 2.5vmax 'Poppins', sans-serif;
   transition: all 0.5s;
   cursor: pointer;
   display: grid;
@@ -64,7 +65,8 @@
 }
 
 .toggleTrue {
-  background-color: #8cdb44;
+  background: linear-gradient(50deg, #8cdb44 35%, #448508 100%);
+
   color: white;
 }
 
@@ -76,7 +78,7 @@
   background-color: #8cdb44;
   height: 10px;
   width: 8%;
-  margin-top: 10px;
+  margin-top: 12px;
   border: none;
   transition: all 0.5s;
   clip-path: polygon(50% 100%, 100% 0, 0 0);

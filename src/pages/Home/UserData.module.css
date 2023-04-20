@@ -21,10 +21,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
 }
 .todo {
   border: 1px solid #136bf1;
-  background-color: #0d53bf;
+  /* background-color: #0d53bf; */
+
+  background: linear-gradient(50deg, #0d53bf 35%, #136bf1 100%);
+  font-family: 'Poppins', sans-serif;
   position: relative;
 
   /* background: linear-gradient(#0d53bf #136bf1); */
@@ -32,7 +36,10 @@
 
 .inProcess {
   border: 1px solid #f4793b;
-  background-color: #e7692a;
+  /* background-color: #e7692a; */
+
+  background: linear-gradient(50deg, #e7692a 35%, #f4793b 100%);
+  font-family: 'Poppins', sans-serif;
 }
 
 .inProcess > span,
@@ -52,22 +59,22 @@
   position: relative;
   background-color: #0d53bf !important;
   top: 20px;
-  right: 29px;
+  left: 7vw;
   border-radius: 0% !important;
   display: block;
   height: 2vh;
-  clip-path: polygon(100% 0, 0 0, 0 100%);
+  clip-path: polygon(49% 100%, 0 0, 100% 0);
   transition: ease-in-out 0.1s;
 }
 .edge2 {
   position: relative;
   background-color: #e7692a !important;
   top: 20px;
-  left: 12px;
+  right: 12vw;
   border-radius: 0% !important;
   display: block;
   height: 2vh;
-  clip-path: polygon(100% 100%, 100% 0, 0 0);
+  clip-path: polygon(49% 100%, 0 0, 100% 0);
   transition: ease-in-out 0.1s;
 }
 
@@ -80,4 +87,16 @@
 }
 .all_ticket::-webkit-scrollbar {
   display: none;
+}
+
+.Emptymessage {
+  background-color: white;
+  color: black;
+  margin-top: 60px;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: 1s ease-in-out;
 }
