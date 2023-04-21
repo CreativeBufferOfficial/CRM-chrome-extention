@@ -14,7 +14,7 @@
   color: white;
   cursor: pointer;
   font-size: 12px;
-  padding: 5px 0px;
+  padding: 5px 0px 5px 0px;
   height: 100%;
   width: 35vw;
   display: flex;
@@ -85,15 +85,20 @@
   max-height: 80vh;
   transition: ease-in 0.1s;
 }
-.all_ticket::-webkit-scrollbar {
-  display: none;
+.no_ticket {
+  padding: 10px;
+  /* max-height: 80vh; */
+  transition: ease-in 0.1s;
 }
+/* .all_ticket::-webkit-scrollbar {
+  display: none;
+} */
 
 .Emptymessage {
   background-color: white;
   color: black;
-  margin-top: 60px;
-  height: 10vh;
+  margin-top: 20px;
+  height: 8vh;
   display: flex;
   flex-direction: row;
   justify-content: center;

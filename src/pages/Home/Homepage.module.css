@@ -15,7 +15,6 @@
 /* TODO: */
 *::-webkit-scrollbar {
   display: none;
-  overflow-y: none;
 }
 .main > div {
   margin-top: 20px;
@@ -29,7 +28,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 9vw;
+  padding: 0px 10vw;
+  /* width: 110vw; */
 }
 
 .container {
@@ -133,12 +133,19 @@
   border: none;
   background-color: white;
   color: black;
+  /* padding: 0px 20px; */
+  /* width: 30vw; */
   /* font-family: 'FontAwesome', 'Second Font name'; */
 }
 .dropdown:hover {
-  background-color: white;
   color: black;
   border: none;
+}
+.dropdown:active,
+.dropdown:focus {
+  color: black;
+  outline: none !important;
+  box-shadow: none;
 }
 .dropdown_img {
   margin-right: 10px;

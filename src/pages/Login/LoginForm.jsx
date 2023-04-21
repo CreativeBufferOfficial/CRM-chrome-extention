@@ -43,7 +43,7 @@ const LoginForm = ({ isAuthenticated, error }) => {
         className={`mb-3${classes.form_group} `}
         controlId="formBasicEmail"
       >
-        <i class={classes.user_icon}>
+        <i className={classes.user_icon}>
           <img src={userIcon} alt="email" />
         </i>
         <Form.Control

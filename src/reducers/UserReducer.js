@@ -5,9 +5,9 @@ import {
   LOAD_USER_REQUEST_TODO,
   LOAD_USER_SUCCESS_TODO,
   LOAD_USER_FAIL_TODO,
-  LOAD_USER_REQUEST_PROCESS,
-  LOAD_USER_SUCCESS_PROCESS,
-  LOAD_USER_FAIL_PROCESS,
+  LOAD_USER_REQUEST_INPROCCESS,
+  LOAD_USER_SUCCESS_INPROCCESS,
+  LOAD_USER_FAIL_INPROCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   // UPDATE_PROFILE_REQUEST,
@@ -71,28 +71,25 @@ export const userReducer = (state = { user: {} }, action) => {
   }
 };
 
-export const userTicketReducer = (state = { ticket: {} }, action) => {
+export const userTodoTicketReducer = (state = { ticketTodo: {} }, action) => {
   switch (action.type) {
     case LOAD_USER_REQUEST_TODO:
-    case LOAD_USER_REQUEST_PROCESS:
       return {
         loading: true,
         // isAuthenticated: false,
       };
     case LOAD_USER_SUCCESS_TODO:
-    case LOAD_USER_SUCCESS_PROCESS:
       return {
         ...state,
         loading: false,
         isAuthenticated: true,
-        ticket: action.payload,
+        ticketTodo: action.payload,
       };
     case LOAD_USER_FAIL_TODO:
-    case LOAD_USER_FAIL_PROCESS:
       return {
         loading: false,
         isAuthenticated: false,
-        ticket: null,
+        ticketTodo: null,
         error: action.payload,
       };
     case CLEAR_ERRORS:
@@ -105,6 +102,41 @@ export const userTicketReducer = (state = { ticket: {} }, action) => {
       return state;
   }
 };
+
+// export const userInProccessTicketReducer = (
+//   state = { ticketInProccess: {} },
+//   action
+// ) => {
+//   switch (action.type) {
+//     case LOAD_USER_REQUEST_INPROCCESS:
+//       return {
+//         loading: true,
+//         // isAuthenticated: false,
+//       };
+//     case LOAD_USER_SUCCESS_INPROCCESS:
+//       return {
+//         ...state,
+//         loading: false,
+//         isAuthenticated: true,
+//         ticketInProccess: action.payload,
+//       };
+//     case LOAD_USER_FAIL_INPROCCESS:
+//       return {
+//         loading: false,
+//         isAuthenticated: false,
+//         ticketInProccess: null,
+//         error: action.payload,
+//       };
+//     case CLEAR_ERRORS:
+//       return {
+//         ...state,
+//         error: null,
+//       };
+
+//     default:
+//       return state;
+//   }
+// };
 
 export const statusReducer = (state = {}, action) => {
   switch (action.type) {

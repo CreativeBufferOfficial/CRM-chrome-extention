@@ -22,6 +22,7 @@ import {
   toDateMonth,
   fromDateMonth,
 } from '../../utlis/Helper';
+
 const Homepage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -119,7 +120,8 @@ const Homepage = () => {
             <DropdownButton
               onSelect={logoutHandler}
               id="dropdown-basic-button"
-              title={userName?.slice(0, 10)}
+              title={userName?.slice(0, 10).toString()}
+              // title={'Deepak Singh'.slice(0, 10)}
               variant="default"
               className={classes.dropdown}
             >
@@ -136,7 +138,7 @@ const Homepage = () => {
                   className={classes.dropdown_img}
                   src={settingIcon}
                   alt="user_icon"
-                />{' '}
+                />
                 Change Password
               </Dropdown.Item>
               <Dropdown.Divider />
@@ -145,7 +147,7 @@ const Homepage = () => {
                   className={classes.dropdown_img}
                   src={logoutIcon}
                   alt="user_icon"
-                />{' '}
+                />
                 Logout
               </Dropdown.Item>
             </DropdownButton>

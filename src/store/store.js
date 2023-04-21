@@ -9,13 +9,15 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import {
   userReducer,
   statusReducer,
-  userTicketReducer,
+  userTodoTicketReducer,
+  // userInProccessTicketReducer,
 } from '../reducers/UserReducer';
 
 let initialState = {};
 const reducer = combineReducers({
   user: userReducer,
-  ticket: userTicketReducer,
+  ticketTodo: userTodoTicketReducer,
+  // ticketInProccess: userInProccessTicketReducer,
   status: statusReducer,
 });
 

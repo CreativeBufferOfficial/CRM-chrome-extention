@@ -5,9 +5,9 @@ import {
   LOAD_USER_REQUEST_TODO,
   LOAD_USER_SUCCESS_TODO,
   LOAD_USER_FAIL_TODO,
-  LOAD_USER_REQUEST_PROCESS,
-  LOAD_USER_SUCCESS_PROCESS,
-  LOAD_USER_FAIL_PROCESS,
+  LOAD_USER_REQUEST_INPROCCESS,
+  LOAD_USER_SUCCESS_INPROCCESS,
+  LOAD_USER_FAIL_INPROCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   // UPDATE_PROFILE_REQUEST,
@@ -64,7 +64,7 @@ export const loadUserTodo =
           'get'
         );
       }
-
+      console.log('todo>>>>>>>>>>>>>', data.data.projectTasks);
       dispatch({
         type: LOAD_USER_SUCCESS_TODO,
         payload: data.data.projectTasks,
@@ -77,24 +77,37 @@ export const loadUserTodo =
     }
   };
 
-// //Load User --  userDetails
-// export const loadUserProcess = () => async (dispatch) => {
-//   try {
-//     dispatch({ type: LOAD_USER_REQUEST_PROCESS });
+// export const loadUserInProccess =
+//   (status, today, fromDate, toDate) => async (dispatch) => {
+//     try {
+//       dispatch({ type: LOAD_USER_REQUEST_INPROCCESS });
+//       let data;
+//       // const { data } = await axios.get(`/api/v1/me`);
+//       if (status && today) {
+//         data = await callAPI(
+//           `${apiUrls.ticketStatus}${status}?todayDate=${today}`,
+//           'get'
+//         );
+//       } else if (status && fromDate && toDate) {
+//         data = await callAPI(
+//           `${apiUrls.ticketStatus}${status}?fromDate=${fromDate}&toDate=${toDate}`,
+//           'get'
+//         );
+//       }
 
-//     // const { data } = await axios.get(`/api/v1/me`);
+//       console.log('InProccess>>>>>>>>>>>>>', data.data.projectTasks);
 
-//     const data = await callAPI(`${apiUrls.ticketStatus}${1}`, 'get');
-
-//     console.log(data.data.projectTasks.projectTasks);
-//     dispatch({ type: LOAD_USER_SUCCESS_PROCESS, payload: data.data });
-//   } catch (error) {
-//     dispatch({
-//       type: LOAD_USER_FAIL_PROCESS,
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
+//       dispatch({
+//         type: LOAD_USER_SUCCESS_INPROCCESS,
+//         payload: data.data.projectTasks,
+//       });
+//     } catch (error) {
+//       dispatch({
+//         type: LOAD_USER_FAIL_INPROCCESS,
+//         payload: error.response.data.message,
+//       });
+//     }
+//   };
 
 //Logout User
 export const logout = () => async (dispatch) => {
