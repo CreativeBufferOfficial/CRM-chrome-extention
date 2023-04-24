@@ -87,7 +87,7 @@
 }
 .no_ticket {
   padding: 10px;
-  /* max-height: 80vh; */
+  max-height: 80vh;
   transition: ease-in 0.1s;
 }
 /* .all_ticket::-webkit-scrollbar {

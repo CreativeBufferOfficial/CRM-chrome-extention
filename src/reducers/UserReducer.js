@@ -74,20 +74,24 @@ export const userReducer = (state = { user: {} }, action) => {
 export const userTodoTicketReducer = (state = { ticketTodo: {} }, action) => {
   switch (action.type) {
     case LOAD_USER_REQUEST_TODO:
+      // case LOAD_USER_REQUEST_INPROCCESS:
       return {
-        loading: true,
+        loadingTodo: true,
         // isAuthenticated: false,
       };
     case LOAD_USER_SUCCESS_TODO:
+      // case LOAD_USER_SUCCESS_INPROCCESS:
+      console.log('REDUCER INSIDE', action.payload);
       return {
         ...state,
-        loading: false,
+        loadingTodo: false,
         isAuthenticated: true,
         ticketTodo: action.payload,
       };
     case LOAD_USER_FAIL_TODO:
+      // case LOAD_USER_FAIL_INPROCCESS:
       return {
-        loading: false,
+        loadingTodo: false,
         isAuthenticated: false,
         ticketTodo: null,
         error: action.payload,
@@ -103,40 +107,40 @@ export const userTodoTicketReducer = (state = { ticketTodo: {} }, action) => {
   }
 };
 
-// export const userInProccessTicketReducer = (
-//   state = { ticketInProccess: {} },
-//   action
-// ) => {
-//   switch (action.type) {
-//     case LOAD_USER_REQUEST_INPROCCESS:
-//       return {
-//         loading: true,
-//         // isAuthenticated: false,
-//       };
-//     case LOAD_USER_SUCCESS_INPROCCESS:
-//       return {
-//         ...state,
-//         loading: false,
-//         isAuthenticated: true,
-//         ticketInProccess: action.payload,
-//       };
-//     case LOAD_USER_FAIL_INPROCCESS:
-//       return {
-//         loading: false,
-//         isAuthenticated: false,
-//         ticketInProccess: null,
-//         error: action.payload,
-//       };
-//     case CLEAR_ERRORS:
-//       return {
-//         ...state,
-//         error: null,
-//       };
+export const userInProccessTicketReducer = (
+  state = { ticketInProccess: {} },
+  action
+) => {
+  switch (action.type) {
+    case LOAD_USER_REQUEST_INPROCCESS:
+      return {
+        loadingInProcess: true,
+        // isAuthenticated: false,
+      };
+    case LOAD_USER_SUCCESS_INPROCCESS:
+      return {
+        ...state,
+        loadingInProcess: false,
+        isAuthenticated: true,
+        ticketInProccess: action.payload,
+      };
+    case LOAD_USER_FAIL_INPROCCESS:
+      return {
+        loadingInProcess: false,
+        isAuthenticated: false,
+        ticketInProccess: null,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
 
-//     default:
-//       return state;
-//   }
-// };
+    default:
+      return state;
+  }
+};
 
 export const statusReducer = (state = {}, action) => {
   switch (action.type) {

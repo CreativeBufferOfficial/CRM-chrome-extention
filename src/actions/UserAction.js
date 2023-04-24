@@ -47,10 +47,14 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 //Load User --  userDetails
-export const loadUserTodo =
+export const loadUser =
   (status, today, fromDate, toDate) => async (dispatch) => {
     try {
-      dispatch({ type: LOAD_USER_REQUEST_TODO });
+      dispatch({
+        type:
+          status === 1 ? LOAD_USER_REQUEST_TODO : LOAD_USER_REQUEST_INPROCCESS,
+      });
+
       let data;
       // const { data } = await axios.get(`/api/v1/me`);
       if (status && today) {
@@ -66,12 +70,13 @@ export const loadUserTodo =
       }
       console.log('todo>>>>>>>>>>>>>', data.data.projectTasks);
       dispatch({
-        type: LOAD_USER_SUCCESS_TODO,
+        type:
+          status === 1 ? LOAD_USER_SUCCESS_TODO : LOAD_USER_SUCCESS_INPROCCESS,
         payload: data.data.projectTasks,
       });
     } catch (error) {
       dispatch({
-        type: LOAD_USER_FAIL_TODO,
+        type: status === 1 ? LOAD_USER_FAIL_TODO : LOAD_USER_FAIL_INPROCCESS,
         payload: error.response.data.message,
       });
     }

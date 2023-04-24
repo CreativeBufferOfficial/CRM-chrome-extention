@@ -10,14 +10,14 @@ import {
   userReducer,
   statusReducer,
   userTodoTicketReducer,
-  // userInProccessTicketReducer,
+  userInProccessTicketReducer,
 } from '../reducers/UserReducer';
 
 let initialState = {};
 const reducer = combineReducers({
   user: userReducer,
   ticketTodo: userTodoTicketReducer,
-  // ticketInProccess: userInProccessTicketReducer,
+  ticketInProccess: userInProccessTicketReducer,
   status: statusReducer,
 });
 

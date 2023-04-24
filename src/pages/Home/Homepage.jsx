@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSession } from '../../utlis/auth';
 import { useNavigate } from 'react-router-dom';
 import { removeAuth } from '../../utlis/auth';
-import { apiUrls } from '../../utlis/ApiUrl';
-import { defaultConfig } from '../../utlis/config';
+// import { apiUrls } from '../../utlis/ApiUrl';
+// import { defaultConfig } from '../../utlis/config';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import userIcon from '../../assets/task_list/user_icon.png';
@@ -88,8 +88,6 @@ const Homepage = () => {
       todayTab.current.classList.remove(classes.shiftToLeft);
       setTodayTabActive(true);
       setMonthTabActive(false);
-      // date = todayDate();
-      // date =today.getFullYear() + '-' + formatmonth(today) + '-' + today.getDate();
     }
 
     if (tab === 'month') {
@@ -120,8 +118,9 @@ const Homepage = () => {
             <DropdownButton
               onSelect={logoutHandler}
               id="dropdown-basic-button"
-              title={userName?.slice(0, 10).toString()}
-              // title={'Deepak Singh'.slice(0, 10)}
+              title={userName?.split(' ')[0].slice(0, 10).toString()}
+              // title={'jay'.slice(0, 10)}
+              // title={'jayPrakashSharma'.split(' ')[0].slice(0, 10).toString()}
               variant="default"
               className={classes.dropdown}
             >
@@ -178,16 +177,14 @@ const Homepage = () => {
               <button ref={switcherTab}></button>
             </div>
 
-            <div>
-              <div className={classes.todayTab} ref={todayTab}>
-                <UserData today={todayTab ? date : undefined} />
-              </div>
-              <div className={classes.monthTab} ref={monthTab}>
-                <UserData
-                  fromDate={monthTab ? fromDate : undefined}
-                  toDate={monthTab ? toDate : undefined}
-                />
-              </div>
+            <div className={classes.todayTab} ref={todayTab}>
+              <UserData today={todayTab ? date : undefined} />
+            </div>
+            <div className={classes.monthTab} ref={monthTab}>
+              <UserData
+                fromDate={monthTab ? fromDate : undefined}
+                toDate={monthTab ? toDate : undefined}
+              />
             </div>
           </div>
         </div>
