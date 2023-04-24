@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Ticket from '../../component/UI/Ticket';
 import classes from './UserData.module.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,8 +16,8 @@ const UserData = ({ today, fromDate, toDate }) => {
   const [todo, setTodo] = useState(true);
   const [process, setInProcess] = useState(false);
 
-  const [todoCount, setTodoCount] = useState();
-  const [inProcessCount, setInProcessCount] = useState();
+  // const [todoCount, setTodoCount] = useState();
+  // const [inProcessCount, setInProcessCount] = useState();
 
   useEffect(() => {
     if (today !== undefined) {
@@ -66,7 +66,7 @@ const UserData = ({ today, fromDate, toDate }) => {
     // setTodoCount((prevState) => (!todo ? prevState : ticketTodo.data.length));
   };
 
-  const updateTicket = (ticket_id, status) => {
+  const updateTicketHandler = (ticket_id, status) => {
     dispatch(updateTicketStatus(ticket_id, status));
   };
 
@@ -89,47 +89,22 @@ const UserData = ({ today, fromDate, toDate }) => {
 
         <div
           className={
-            ticketTodo && ticketTodo?.data?.length > 0
+            (ticketTodo && ticketTodo?.data?.length > 0) ||
+            (ticketInProccess && ticketInProccess?.data?.length > 0)
               ? classes.all_ticket
               : classes.no_ticket
           }
         >
-          {/* {loading ? (
-            <Loader />
-          ) : ticketTodo && ticketTodo?.data?.length > 0 ? (
-            ticketTodo?.data?.map((element) => {
-              return (
-                <div key={element.id}>
-                  <Ticket
-                    onTicketDetailsHandler={ticketDetailsHandler}
-                    onTicketStatusUpdate={updateTicket}
-                    id={element.id}
-                    title={element.title}
-                    priority={element.tast_priority}
-                    profileImage={element.user.image.profile_image}
-                    count={element.comments_count}
-                    status={element.status}
-                  />
-                </div>
-              );
-            })
-          ) : (
-            <p className={classes.Emptymessage}>
-              No ticket in your {todo ? 'todo' : 'In Process'} list
-            </p>
-          )} */}
-
-          {/* TODO: */}
           {todo ? (
             loadingTodo ? (
               <Loader />
             ) : ticketTodo && ticketTodo?.data?.length > 0 ? (
               ticketTodo?.data?.map((element) => {
                 return (
-                  <div className={classes.all_ticket} key={element.id}>
+                  <div className={classes.ticketbackground} key={element.id}>
                     <Ticket
                       onTicketDetailsHandler={ticketDetailsHandler}
-                      onTicketStatusUpdate={updateTicket}
+                      onTicketStatusUpdate={updateTicketHandler}
                       id={element.id}
                       title={element.title}
                       priority={element.tast_priority}
@@ -150,10 +125,10 @@ const UserData = ({ today, fromDate, toDate }) => {
           ) : ticketInProccess && ticketInProccess?.data?.length > 0 ? (
             ticketInProccess?.data?.map((element) => {
               return (
-                <div className={classes.all_ticket} key={element.id}>
+                <div className={classes.ticketbackground} key={element.id}>
                   <Ticket
                     onTicketDetailsHandler={ticketDetailsHandler}
-                    onTicketStatusUpdate={updateTicket}
+                    onTicketStatusUpdate={updateTicketHandler}
                     id={element.id}
                     title={element.title}
                     priority={element.tast_priority}

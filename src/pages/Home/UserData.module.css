@@ -90,6 +90,11 @@
   max-height: 80vh;
   transition: ease-in 0.1s;
 }
+
+.ticketbackground {
+  background-color: white;
+  padding: 10px;
+}
 /* .all_ticket::-webkit-scrollbar {
   display: none;
 } */
