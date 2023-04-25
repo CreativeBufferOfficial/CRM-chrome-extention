@@ -80,30 +80,28 @@
 
 .all_ticket {
   background-color: white;
-  padding: 10px;
+  padding: 5px 10px;
+  margin-top: 10px;
   overflow-y: scroll;
   max-height: 80vh;
-  transition: ease-in 0.1s;
 }
 .no_ticket {
-  padding: 10px;
+  /* padding: 10px; */
   max-height: 80vh;
   transition: ease-in 0.1s;
 }
 
 .ticketbackground {
   background-color: white;
-  padding: 10px;
+  /* padding: 5px; */
 }
 /* .all_ticket::-webkit-scrollbar {
   display: none;
 } */
 
 .Emptymessage {
-  background-color: white;
   color: black;
-  margin-top: 20px;
-  height: 8vh;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -47,7 +47,7 @@ const Ticket = (props) => {
                 onTicketDetailsHandler(2410);
               }}
             >
-              {title}
+              {title.slice(0, 60)}
             </p>
           </div>
 
