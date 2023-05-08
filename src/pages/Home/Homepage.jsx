@@ -97,7 +97,7 @@ const Homepage = () => {
   return (
     <>
       <div className={classes.main}>
-        <div div className={classes.header}>
+        <div className={classes.header}>
           <div className={classes.home_logo}>
             <img src={logo} alt="logo" />
           </div>
