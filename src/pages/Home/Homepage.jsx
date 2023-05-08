@@ -2,19 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import classes from './Homepage.module.css';
 import logo from '../../assets/task_list/top_logo.png';
 import UserData from './UserData';
-import { logout, clearErrors } from '../../actions/UserAction';
+import { logout } from '../../actions/UserAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSession } from '../../utlis/auth';
 import { useNavigate } from 'react-router-dom';
 import { removeAuth } from '../../utlis/auth';
-// import { apiUrls } from '../../utlis/ApiUrl';
-// import { defaultConfig } from '../../utlis/config';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import userIcon from '../../assets/task_list/user_icon.png';
 import settingIcon from '../../assets/task_list/setting_icon.png';
 import logoutIcon from '../../assets/task_list/logout_icon.png';
-
 import {
   redirectProfile,
   redirectSetting,
@@ -44,10 +41,6 @@ const Homepage = () => {
   const userId = localStorage.getItem('id');
 
   useEffect(() => {
-    // if (error) {
-    // alert.error(error);
-    // dispatch(clearErrors());
-    // }
     if (isloggedIn === null) {
       navigate('/');
     }
@@ -100,11 +93,6 @@ const Homepage = () => {
       setMonthTabActive(true);
     }
   };
-  console.log(
-    `userName >>>>>>>>>>>>>>>>>> ${user?.name ? user?.name : 'user user user'}`
-  );
-  console.log('name>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', userName);
-  console.log('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', userId);
 
   return (
     <>
@@ -119,8 +107,6 @@ const Homepage = () => {
               onSelect={logoutHandler}
               id="dropdown-basic-button"
               title={userName?.split(' ')[0].slice(0, 10).toString()}
-              // title={'jay'.slice(0, 10)}
-              // title={'jayPrakashSharma'.split(' ')[0].slice(0, 10).toString()}
               variant="default"
               className={classes.dropdown}
             >

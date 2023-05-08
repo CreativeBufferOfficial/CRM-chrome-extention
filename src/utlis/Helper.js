@@ -41,14 +41,12 @@ export const todayDate = () => {
 export const fromDateMonth = () => {
   const newDate = new Date();
   const StartDate = new Date(newDate.getFullYear(), newDate.getMonth(), 1);
-  // const lastDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
   const year = getYear(StartDate);
   const month = formatmonth(StartDate);
   const firstDay = formatDay(StartDate);
 
   const firstDate = `${year}-${month}-${firstDay}`;
 
-  console.log(`inside fromDatamonth ${firstDate}`);
   return firstDate;
 };
 
@@ -59,7 +57,6 @@ export const toDateMonth = () => {
   const month = formatmonth(lastDate);
   const lastDay = formatDay(lastDate);
   const endDate = `${year}-${month}-${lastDay}`;
-  console.log(`inside toDateMonth ${endDate}`);
 
   return endDate;
 };

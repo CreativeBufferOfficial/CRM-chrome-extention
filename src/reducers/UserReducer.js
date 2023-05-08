@@ -10,10 +10,6 @@ import {
   LOAD_USER_FAIL_INPROCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-  // UPDATE_PROFILE_REQUEST,
-  // UPDATE_PROFILE_SUCCESS,
-  // UPDATE_PROFILE_FAIL,
-  // UPDATE_PROFILE_RESET,
   UPDATE_TICKET_REQUEST,
   UPDATE_TICKET_SUCCESS,
   UPDATE_TICKET_FAIL,
@@ -22,8 +18,6 @@ import {
 } from '../constants/UserConstant';
 
 export const userReducer = (state = { user: {} }, action) => {
-  console.log('satet >> ', state);
-
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -31,7 +25,6 @@ export const userReducer = (state = { user: {} }, action) => {
         // isAuthenticated: false,
       };
     case LOGIN_SUCCESS:
-      console.log(' Login reducer >>>>>', action.payload);
       return {
         ...state,
         loading: false,
@@ -74,14 +67,11 @@ export const userReducer = (state = { user: {} }, action) => {
 export const userTodoTicketReducer = (state = { ticketTodo: {} }, action) => {
   switch (action.type) {
     case LOAD_USER_REQUEST_TODO:
-      // case LOAD_USER_REQUEST_INPROCCESS:
       return {
         loadingTodo: true,
         // isAuthenticated: false,
       };
     case LOAD_USER_SUCCESS_TODO:
-      // case LOAD_USER_SUCCESS_INPROCCESS:
-      console.log('REDUCER INSIDE', action.payload);
       return {
         ...state,
         loadingTodo: false,
@@ -89,7 +79,6 @@ export const userTodoTicketReducer = (state = { ticketTodo: {} }, action) => {
         ticketTodo: action.payload,
       };
     case LOAD_USER_FAIL_TODO:
-      // case LOAD_USER_FAIL_INPROCCESS:
       return {
         loadingTodo: false,
         isAuthenticated: false,

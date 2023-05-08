@@ -10,10 +10,7 @@
 .form_group {
   position: relative;
 }
-/* .user_icon,
-.view_icon {
-  position: absolute;
-} */
+
 .user_icon > img {
   position: absolute;
   margin-left: 20px;
@@ -38,7 +35,6 @@
   padding: 10px 10px 10px 50px;
 }
 .input_field::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(160, 160, 160);
   opacity: 1; /* Firefox */
 }
@@ -72,7 +68,6 @@
   border-color: #83c944;
   background-color: #83c944;
   width: 80vw;
-  /* color: white; */
   box-shadow: none;
   margin-top: 10px;
 }

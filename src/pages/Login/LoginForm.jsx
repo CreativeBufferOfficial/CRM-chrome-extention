@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { login, clearErrors } from '../../actions/UserAction';
+import { login } from '../../actions/UserAction';
 import { useDispatch } from 'react-redux';
 import userIcon from '../../assets/login/email.png';
 import passwordIcon from '../../assets/login/password.png';
@@ -20,8 +20,6 @@ const LoginForm = ({ isAuthenticated, error }) => {
   useEffect(() => {
     if (error === 'UnAuthorized') {
       setFailMessage(true);
-
-      // dispatch(clearErrors());
     }
   }, [dispatch, error]);
 

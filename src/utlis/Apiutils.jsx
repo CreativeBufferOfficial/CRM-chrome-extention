@@ -13,13 +13,11 @@ export const callAPI = async (
 ) => {
   const API_ROOT = defaultConfig.baseAPIUrl + 'api/';
   const url = API_ROOT + path;
-  // console.log(`inside API utiles ${localStorage.getItem('accessToken')}`);
 
   const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-
     // AuthKey: await localStorage.getItem('authkey'),
     ...headersObj,
   };

@@ -2,7 +2,6 @@
   margin: 20px 0px;
   border-color: white;
 }
-
 .success_icon {
   display: flex;
   flex-direction: row;
@@ -17,7 +16,6 @@
   color: rgb(129, 125, 125);
   font-weight: 500;
 }
-
 .message {
   margin-top: 10px;
   font-weight: 600;

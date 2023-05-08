@@ -16,9 +16,6 @@ const UserData = ({ today, fromDate, toDate }) => {
   const [todo, setTodo] = useState(true);
   const [process, setInProcess] = useState(false);
 
-  // const [todoCount, setTodoCount] = useState();
-  // const [inProcessCount, setInProcessCount] = useState();
-
   useEffect(() => {
     if (today !== undefined) {
       dispatch(loadUser(1, today));
@@ -28,50 +25,21 @@ const UserData = ({ today, fromDate, toDate }) => {
       dispatch(loadUser(1, null, fromDate, toDate));
       dispatch(loadUser(2, null, fromDate, toDate));
     }
-    // if (todo === true) {
-    //   // console.log(`Date${today}`);
-    //   if (today !== undefined) {
-    //     // console.log('todo today ');
-    //     dispatch(loadUser(1, today));
-    //   } else if (fromDate !== undefined && toDate !== undefined) {
-    //     // console.log('todo month ');
-    //     dispatch(loadUser(1, null, fromDate, toDate));
-    //   }
-    // } else if (process === true) {
-    //   // console.log(`Date${today}`);
-    //   if (today !== undefined) {
-    //     // console.log('inProcess Today');
-    //     dispatch(loadUser(2, today));
-    //   } else if (fromDate !== undefined && toDate !== undefined) {
-    //     // console.log('inProcess month');
-    //     dispatch(loadUser(2, null, fromDate, toDate));
-    //   }
-    // }
   }, [dispatch, todo, process, today, fromDate, toDate, isUpdated]);
 
   const todoHandler = () => {
     setTodo(true);
     setInProcess(false);
-    // setInProcessCount((prevState) =>
-    //   !process ? prevState : ticketTodo.data.length
-    // );
-    // // setInProcessCount((prevState) =>
-    // //   !process ? prevState : ticketInProccess.data.length
-    // // );
   };
 
   const processHandler = () => {
     setInProcess(true);
     setTodo(false);
-    // setTodoCount((prevState) => (!todo ? prevState : ticketTodo.data.length));
   };
 
   const updateTicketHandler = (ticket_id, status) => {
     dispatch(updateTicketStatus(ticket_id, status));
   };
-
-  console.log('PROCESS>>>>>>>>>>>>>>>>>', ticketInProccess);
-  console.log('TODO>>>>>>>>>>>>>>>>>', ticketTodo);
 
   return (
     <>
@@ -101,7 +69,7 @@ const UserData = ({ today, fromDate, toDate }) => {
             ) : ticketTodo && ticketTodo?.data?.length > 0 ? (
               ticketTodo?.data?.map((element) => {
                 return (
-                  <div className={classes.ticketbackground} key={element.id}>
+                  <div key={element.id}>
                     <Ticket
                       onTicketDetailsHandler={ticketDetailsHandler}
                       onTicketStatusUpdate={updateTicketHandler}
@@ -125,7 +93,7 @@ const UserData = ({ today, fromDate, toDate }) => {
           ) : ticketInProccess && ticketInProccess?.data?.length > 0 ? (
             ticketInProccess?.data?.map((element) => {
               return (
-                <div className={classes.ticketbackground} key={element.id}>
+                <div key={element.id}>
                   <Ticket
                     onTicketDetailsHandler={ticketDetailsHandler}
                     onTicketStatusUpdate={updateTicketHandler}

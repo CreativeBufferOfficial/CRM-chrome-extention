@@ -7,7 +7,6 @@
   font-size: 15px;
   line-height: 15px;
 }
-
 .ticket_row,
 .ticket_item,
 .profile_row {
@@ -33,7 +32,6 @@
 .taskname {
   cursor: pointer;
 }
-
 .profile_pic {
   height: 35px;
   width: 35px;
